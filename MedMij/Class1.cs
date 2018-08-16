@@ -6,7 +6,7 @@ namespace MedMij
     {
         public static int return5()
         {
-            return 2 + 2;
+            return 2 + 2 + 1;
         }
     }
 }
