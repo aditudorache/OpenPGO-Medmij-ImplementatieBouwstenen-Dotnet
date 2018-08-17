@@ -21,6 +21,14 @@ namespace MedMij
     </MedMijNodes>
 </Whitelist>";
 
+        public const string WhiltelistSingleXML = @"<Whitelist xmlns=""xmlns://afsprakenstelsel.medmij.nl/whitelist/release2/"">
+    <Tijdstempel>2018-04-16T10:43:41+01:00</Tijdstempel>
+    <Volgnummer>1</Volgnummer>
+    <MedMijNodes>
+        <MedMijNode>x.yz</MedMijNode>
+    </MedMijNodes>
+</Whitelist>";
+
         public const string WhitelistXSDFail1 = "<test/>";
 
         public const string WhitelistXSDFail2 = @"<Whitelist xmlns=""xmlns://afsprakenstelsel.medmij.nl/whitelist/release2/""/>";

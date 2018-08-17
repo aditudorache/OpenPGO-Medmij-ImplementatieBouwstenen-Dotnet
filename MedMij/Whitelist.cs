@@ -11,31 +11,31 @@ namespace MedMij
     using System.Xml.Linq;
     using System.Xml.Schema;
 
-    public class WhiteList
+    public class Whitelist
     {
         public static readonly XNamespace NS = "xmlns://afsprakenstelsel.medmij.nl/whitelist/release2/";
-        public static readonly XName WhiteListRoot = NS + "Whitelist";
+        public static readonly XName WhitelistRoot = NS + "Whitelist";
         public static readonly XName MedMijNode = NS + "MedMijNode";
 
         private readonly HashSet<string> hosts;
 
-        private WhiteList(XDocument doc)
+        private Whitelist(XDocument doc)
         {
             Validate(doc);
             this.hosts = Parse(doc);
         }
 
-        public static WhiteList FromXMLData(string xmlData)
+        public static Whitelist FromXMLData(string xmlData)
         {
             var doc = XDocument.Parse(xmlData);
-            return new WhiteList(doc);
+            return new Whitelist(doc);
         }
 
-        public static async Task<WhiteList> FromURL(string url)
+        public static async Task<Whitelist> FromURL(string url)
         {
             using (var c = new HttpClient())
             {
-                var data = await c.GetStringAsync(url);
+                var data = await c.GetStringAsync(url).ConfigureAwait(false);
                 return FromXMLData(data);
             }
         }
@@ -45,17 +45,17 @@ namespace MedMij
         private static void Validate(XDocument doc)
         {
             var schemas = new XmlSchemaSet();
-            var assembly = typeof(WhiteList).Assembly;
+            var assembly = typeof(Whitelist).Assembly;
             var resource = assembly.GetManifestResourceStream("MedMij.Whitelist.xsd");
             var schemareader = XmlReader.Create(resource);
 
             schemas.Add(NS.NamespaceName, schemareader);
             doc.Validate(schemas, (a, b) => throw b.Exception);
 
-            var root = doc.Element(WhiteListRoot);
+            var root = doc.Element(WhitelistRoot);
             if (root == null)
             {
-                throw new XmlSchemaException($"Wrong root element: got {doc.Root.Name} expected {WhiteListRoot}");
+                throw new XmlSchemaException($"Wrong root element: got {doc.Root.Name} expected {WhitelistRoot}");
             }
         }
 

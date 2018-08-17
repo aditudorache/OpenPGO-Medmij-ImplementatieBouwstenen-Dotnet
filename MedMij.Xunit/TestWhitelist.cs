@@ -11,16 +11,17 @@ namespace MedMij.Xunit
     {
         [Theory]
         [InlineData(TestData.WhiltelistExampleXML)]
-        public void WhiteListParseOK(string xmlData)
+        [InlineData(TestData.WhiltelistSingleXML)]
+        public void WhitelistParseOK(string xmlData)
         {
-            var whitelist = WhiteList.FromXMLData(xmlData);
+            var whitelist = Whitelist.FromXMLData(xmlData);
         }
 
         [Theory]
         [InlineData(TestData.WhitelistInvalidXML)]
         public void WhitelistInvalidXML(string xmlData)
         {
-            Assert.ThrowsAny<XmlException>(() => WhiteList.FromXMLData(xmlData));
+            Assert.ThrowsAny<XmlException>(() => Whitelist.FromXMLData(xmlData));
         }
 
         [Theory]
@@ -29,14 +30,14 @@ namespace MedMij.Xunit
         public void WhitelistXSDFail(string xmlData)
         {
             Assert.ThrowsAny<System.Xml.Schema.XmlSchemaException>(
-                () => WhiteList.FromXMLData(xmlData));
+                () => Whitelist.FromXMLData(xmlData));
         }
 
         [Theory]
         [InlineData("rcf-rso.nl")]
-        public void WhiteListContains(string hostname)
+        public void WhitelistContains(string hostname)
         {
-            var whitelist = WhiteList.FromXMLData(TestData.WhiltelistExampleXML);
+            var whitelist = Whitelist.FromXMLData(TestData.WhiltelistExampleXML);
             Assert.True(whitelist.Contains(hostname));
         }
 
@@ -44,17 +45,18 @@ namespace MedMij.Xunit
         [InlineData("rcf-rso.nl.")]
         [InlineData("RCF-RSO.NL")]
         [InlineData("")]
-        public void WhiteListNotContains(string hostname)
+        [InlineData(null)]
+        public void WhitelistNotContains(string hostname)
         {
-            var whitelist = WhiteList.FromXMLData(TestData.WhiltelistExampleXML);
+            var whitelist = Whitelist.FromXMLData(TestData.WhiltelistExampleXML);
             Assert.False(whitelist.Contains(hostname));
         }
 
         [Theory]
         [InlineData(TestData.WhitelistURL)]
-        public async Task<WhiteList> WhiteListDownload(string url)
+        public async Task<Whitelist> WhitelistDownload(string url)
         {
-            return await WhiteList.FromURL(url).ConfigureAwait(false);
+            return await Whitelist.FromURL(url);
         }
     }
 }
