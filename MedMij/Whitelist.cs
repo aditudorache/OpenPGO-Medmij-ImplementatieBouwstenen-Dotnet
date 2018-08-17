@@ -1,4 +1,4 @@
-//  Copyright (c) Zorgdoc.  All Rights Reserved.  Licensed under the AGPLv3.
+// Copyright (c) Zorgdoc.  All Rights Reserved.  Licensed under the AGPLv3.
 
 namespace MedMij
 {
@@ -16,12 +16,13 @@ namespace MedMij
         public static readonly XNamespace NS = "xmlns://afsprakenstelsel.medmij.nl/whitelist/release2/";
         public static readonly XName WhitelistRoot = NS + "Whitelist";
         public static readonly XName MedMijNode = NS + "MedMijNode";
+        private static readonly XmlSchemaSet Schemas = XMLUtils.SchemaSetFromResource("Whitelist.xsd", NS);
 
         private readonly HashSet<string> hosts;
 
         private Whitelist(XDocument doc)
         {
-            Validate(doc);
+            XMLUtils.Validate(doc, Schemas, WhitelistRoot);
             this.hosts = Parse(doc);
         }
 
@@ -31,9 +32,9 @@ namespace MedMij
             return new Whitelist(doc);
         }
 
-        public static async Task<Whitelist> FromURL(string url)
+        public static async Task<Whitelist> FromURL(string url, System.Net.Http.IHttpClientFactory httpClientFactory)
         {
-            using (var c = new HttpClient())
+            using (var c = httpClientFactory.CreateClient())
             {
                 var data = await c.GetStringAsync(url).ConfigureAwait(false);
                 return FromXMLData(data);
@@ -41,23 +42,6 @@ namespace MedMij
         }
 
         public bool Contains(string hostname) => this.hosts.Contains(hostname);
-
-        private static void Validate(XDocument doc)
-        {
-            var schemas = new XmlSchemaSet();
-            var assembly = typeof(Whitelist).Assembly;
-            var resource = assembly.GetManifestResourceStream("MedMij.Whitelist.xsd");
-            var schemareader = XmlReader.Create(resource);
-
-            schemas.Add(NS.NamespaceName, schemareader);
-            doc.Validate(schemas, (a, b) => throw b.Exception);
-
-            var root = doc.Element(WhitelistRoot);
-            if (root == null)
-            {
-                throw new XmlSchemaException($"Wrong root element: got {doc.Root.Name} expected {WhitelistRoot}");
-            }
-        }
 
         private static HashSet<string> Parse(XDocument doc)
             => new HashSet<string>(doc.Descendants(MedMijNode).Select(n => n.Value));

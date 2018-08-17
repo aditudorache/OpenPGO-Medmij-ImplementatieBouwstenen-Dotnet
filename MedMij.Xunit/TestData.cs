@@ -1,4 +1,4 @@
-//  Copyright (c) Zorgdoc.  All Rights Reserved.  Licensed under the AGPLv3.
+// Copyright (c) Zorgdoc.  All Rights Reserved.  Licensed under the AGPLv3.
 
 namespace MedMij
 {

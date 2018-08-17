@@ -1,8 +1,11 @@
-//  Copyright (c) Zorgdoc.  All Rights Reserved.  Licensed under the AGPLv3.
+// Copyright (c) Zorgdoc.  All Rights Reserved.  Licensed under the AGPLv3.
 
 namespace MedMij.Xunit
 {
     using System;
+    using System.Net;
+    using System.Net.Http;
+    using System.Threading;
     using System.Threading.Tasks;
     using System.Xml;
     using global::Xunit;
@@ -56,7 +59,8 @@ namespace MedMij.Xunit
         [InlineData(TestData.WhitelistURL)]
         public async Task<Whitelist> WhitelistDownload(string url)
         {
-            return await Whitelist.FromURL(url);
+            var httpClientFactory = new StringHttpClienFactoryMock(TestData.WhiltelistExampleXML);
+            return await Whitelist.FromURL(url, httpClientFactory);
         }
     }
 }
