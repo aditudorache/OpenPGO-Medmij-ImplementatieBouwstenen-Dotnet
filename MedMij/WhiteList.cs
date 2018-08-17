@@ -5,6 +5,8 @@ namespace MedMij
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net.Http;
+    using System.Threading.Tasks;
     using System.Xml;
     using System.Xml.Linq;
     using System.Xml.Schema;
@@ -27,6 +29,15 @@ namespace MedMij
         {
             var doc = XDocument.Parse(xmlData);
             return new WhiteList(doc);
+        }
+
+        public static async Task<WhiteList> FromURL(string url)
+        {
+            using (var c = new HttpClient())
+            {
+                var data = await c.GetStringAsync(url);
+                return FromXMLData(data);
+            }
         }
 
         public bool Contains(string hostname) => this.hosts.Contains(hostname);

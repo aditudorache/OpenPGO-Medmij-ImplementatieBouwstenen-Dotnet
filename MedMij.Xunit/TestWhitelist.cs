@@ -3,6 +3,7 @@
 namespace MedMij.Xunit
 {
     using System;
+    using System.Threading.Tasks;
     using System.Xml;
     using global::Xunit;
 
@@ -47,6 +48,13 @@ namespace MedMij.Xunit
         {
             var whitelist = WhiteList.FromXMLData(TestData.WhiltelistExampleXML);
             Assert.False(whitelist.Contains(hostname));
+        }
+
+        [Theory]
+        [InlineData(TestData.WhitelistURL)]
+        public async Task<WhiteList> WhiteListDownload(string url)
+        {
+            return await WhiteList.FromURL(url).ConfigureAwait(false);
         }
     }
 }

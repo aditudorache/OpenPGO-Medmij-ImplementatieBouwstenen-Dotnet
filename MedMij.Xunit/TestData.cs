@@ -26,5 +26,7 @@ namespace MedMij
         public const string WhitelistXSDFail2 = @"<Whitelist xmlns=""xmlns://afsprakenstelsel.medmij.nl/whitelist/release2/""/>";
 
         public const string WhitelistInvalidXML = "<hhhu";
+
+        public const string WhitelistURL = "https://raw.githubusercontent.com/GidsOpenStandaarden/OpenPGO/6bb34321ceff9fd6e53dd243090b8f4b6aad7760/Resources/MedMij_Whitelist_example.xml";
     }
 }
