@@ -1,5 +1,9 @@
-namespace MedMij {
-    public static class TestData {        
+//  Copyright (c) Zorgdoc.  All Rights Reserved.  Licensed under the AGPLv3.
+
+namespace MedMij
+{
+    public static class TestData
+    {
         public const string WhiltelistExampleXML = @"<?xml version=""1.0"" encoding=""UTF-8""?>
 <!--File version: 2-->
 <Whitelist xmlns=""xmlns://afsprakenstelsel.medmij.nl/whitelist/release2/"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xsi:schemaLocation=""xmlns://afsprakenstelsel.medmij.nl/whitelist/release2/ MedMij_Whitelist.xsd"">
@@ -16,7 +20,11 @@ namespace MedMij {
         <MedMijNode>rcf-rso.nl</MedMijNode>
     </MedMijNodes>
 </Whitelist>";
-        public const string WhitelistNietXSD = "<test/>";
+
+        public const string WhitelistXSDFail1 = "<test/>";
+
+        public const string WhitelistXSDFail2 = @"<Whitelist xmlns=""xmlns://afsprakenstelsel.medmij.nl/whitelist/release2/""/>";
+
         public const string WhitelistInvalidXML = "<hhhu";
     }
 }
