@@ -10,7 +10,7 @@ namespace MedMij
 
     internal static class XMLUtils
     {
-        static readonly Assembly assembly = typeof(Whitelist).Assembly;
+        static readonly Assembly assembly = typeof(XMLUtils).Assembly;
 
         public static XmlSchemaSet SchemaSetFromResource(string name, XNamespace ns)
         {
