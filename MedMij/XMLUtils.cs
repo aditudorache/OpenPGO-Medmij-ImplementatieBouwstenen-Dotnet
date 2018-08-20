@@ -1,21 +1,22 @@
-// Copyright (c) Zorgdoc.  All Rights Reserved.  Licensed under the AGPLv3.
+// Copyright (c) Zorgdoc.  All rights reserved.  Licensed under the AGPLv3.
 
 namespace MedMij
 {
     using System;
+    using System.Net.Http;
     using System.Reflection;
+    using System.Threading;
+    using System.Threading.Tasks;
     using System.Xml;
     using System.Xml.Linq;
     using System.Xml.Schema;
 
     internal static class XMLUtils
     {
-        static readonly Assembly assembly = typeof(XMLUtils).Assembly;
-
-        public static XmlSchemaSet SchemaSetFromResource(string name, XNamespace ns)
+        internal static XmlSchemaSet SchemaSetFromResource(string name, XNamespace ns)
         {
             var resourcename = $"MedMij.{name}";
-            var resource = assembly.GetManifestResourceStream(resourcename);
+            var resource = typeof(XMLUtils).Assembly.GetManifestResourceStream(resourcename);
             if (resource == null)
             {
                 throw new InvalidOperationException($"Resource {resourcename} not found.");
@@ -27,7 +28,7 @@ namespace MedMij
             return schemas;
         }
 
-        public static void Validate(XDocument doc, XmlSchemaSet schemas, XName rootname)
+        internal static void Validate(XDocument doc, XmlSchemaSet schemas, XName rootname)
         {
             doc.Validate(schemas, (a, b) => throw b.Exception);
             var root = doc.Element(rootname);
@@ -35,6 +36,14 @@ namespace MedMij
             if (root == null)
             {
                 throw new XmlSchemaException($"Wrong root element: got {doc.Root.Name} expected {rootname}");
+            }
+        }
+
+        internal static async Task<string> GetStringAsync(this HttpClient c, Uri uri, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var r = await c.GetAsync(uri, cancellationToken).ConfigureAwait(false))
+            {
+                return await r.Content.ReadAsStringAsync().ConfigureAwait(false);
             }
         }
     }

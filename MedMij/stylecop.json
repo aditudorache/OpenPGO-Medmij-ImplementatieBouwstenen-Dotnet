@@ -1,0 +1,11 @@
+{
+  "$schema": "https://raw.githubusercontent.com/DotNetAnalyzers/StyleCopAnalyzers/master/StyleCop.Analyzers/StyleCop.Analyzers/Settings/stylecop.schema.json",
+  "settings": {
+    "documentationRules": {
+      "xmlHeader": false,
+      "copyrightText": "Copyright (c) Zorgdoc.  All rights reserved.  Licensed under the AGPLv3.",
+      "documentationCulture": "nl-NL",
+      "documentInternalElements": false
+    }
+  }
+}

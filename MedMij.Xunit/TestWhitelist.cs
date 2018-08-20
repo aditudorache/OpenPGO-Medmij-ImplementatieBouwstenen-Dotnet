@@ -2,6 +2,7 @@
 
 namespace MedMij.Xunit
 {
+    using System;
     using System.Threading.Tasks;
     using System.Xml;
     using global::Xunit;
@@ -53,10 +54,10 @@ namespace MedMij.Xunit
 
         [Theory]
         [InlineData(TestData.WhitelistURL)]
-        public async Task<Whitelist> WhitelistDownload(string url)
+        public async Task<Whitelist> WhitelistDownload(string uri)
         {
             var httpClientFactory = new StringHttpClienFactoryMock(TestData.WhiltelistExampleXML);
-            return await Whitelist.FromURL(url, httpClientFactory);
+            return await Whitelist.FromURL(new Uri(uri), httpClientFactory);
         }
     }
 }

@@ -1,6 +1,6 @@
 // Copyright (c) Zorgdoc.  All Rights Reserved.  Licensed under the AGPLv3.
 
-namespace MedMij
+namespace MedMij.Xunit
 {
     public static class TestData
     {
@@ -38,7 +38,7 @@ namespace MedMij
         public const string WhitelistURL = "https://raw.githubusercontent.com/GidsOpenStandaarden/OpenPGO/6bb34321ceff9fd6e53dd243090b8f4b6aad7760/Resources/MedMij_Whitelist_example.xml";
 
 
-        public const string ZorgaanbiederslijstExampleXML = @"<?xml version=""1.0"" encoding=""UTF-8""?>
+        public const string ZorgaanbiedersCollectionExampleXML = @"<?xml version=""1.0"" encoding=""UTF-8""?>
 <!--File version: 2-->
 <Zorgaanbiederslijst xmlns=""xmlns://afsprakenstelsel.medmij.nl/zorgaanbiederslijst/release2/"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xsi:schemaLocation=""xmlns://afsprakenstelsel.medmij.nl/zorgaanbiederslijst/release2/ MedMij_Zorgaanbiederslijst.xsd"">
     <Tijdstempel>2018-04-16T12:56:33Z</Tijdstempel>
