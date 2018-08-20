@@ -33,7 +33,7 @@ namespace MedMij.Xunit
 
         public const string WhitelistXSDFail2 = @"<Whitelist xmlns=""xmlns://afsprakenstelsel.medmij.nl/whitelist/release2/""/>";
 
-        public const string WhitelistInvalidXML = "<hhhu";
+        public const string InvalidXML = "<hhhu";
 
         public const string WhitelistURL = "https://raw.githubusercontent.com/GidsOpenStandaarden/OpenPGO/6bb34321ceff9fd6e53dd243090b8f4b6aad7760/Resources/MedMij_Whitelist_example.xml";
 
@@ -113,6 +113,19 @@ namespace MedMij.Xunit
         </Zorgaanbieder>
     </Zorgaanbieders>
 </Zorgaanbiederslijst>";
+        public const string ZorgaanbiedersCollectionEmptyExampleXML = @"<?xml version=""1.0"" encoding=""UTF-8""?>
+<!--File version: 2-->
+<Zorgaanbiederslijst xmlns=""xmlns://afsprakenstelsel.medmij.nl/zorgaanbiederslijst/release2/"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xsi:schemaLocation=""xmlns://afsprakenstelsel.medmij.nl/zorgaanbiederslijst/release2/ MedMij_Zorgaanbiederslijst.xsd"">
+    <Tijdstempel>2018-04-16T12:56:33Z</Tijdstempel>
+    <Volgnummer>6</Volgnummer>
+    <Zorgaanbieders>
+    </Zorgaanbieders>
+</Zorgaanbiederslijst>";
 
+        public const string ZorgaanbiedersCollectionXSDFail1 = "<test/>";
+
+        public const string ZorgaanbiedersCollectionXSDFail2 = @"<Zorgaanbiederslijst xmlns=""xmlns://afsprakenstelsel.medmij.nl/zorgaanbiederslijst/release2/"" />";
+
+        public const string ZorgaanbiedersCollectionURL = "https://raw.githubusercontent.com/GidsOpenStandaarden/OpenPGO/6bb34321ceff9fd6e53dd243090b8f4b6aad7760/Resources/MedMij_Zorgaanbiederslijst_example.xml";
     }
 }

@@ -18,7 +18,7 @@ namespace MedMij.Xunit
         }
 
         [Theory]
-        [InlineData(TestData.WhitelistInvalidXML)]
+        [InlineData(TestData.InvalidXML)]
         public void WhitelistInvalidXML(string xmlData)
         {
             Assert.ThrowsAny<XmlException>(() => Whitelist.FromXMLData(xmlData));

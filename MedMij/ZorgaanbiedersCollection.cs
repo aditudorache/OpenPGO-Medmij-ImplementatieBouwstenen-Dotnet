@@ -62,6 +62,14 @@ namespace MedMij
         }
 
         /// <summary>
+        /// Geeft de <see cref="Zorgaanbieder"/> met de opgegeven naam.
+        /// </summary>
+        /// <param name="name">De naam van de <see cref="Zorgaanbieder"/></param>
+        /// <returns>De gezochte <see cref="Zorgaanbieder"/>.</returns>
+        /// <exception cref="System.Collections.Generic.KeyNotFoundException">Wordt gegenereerd als de naam niet wordt gevonden.</exception>
+        public Zorgaanbieder GetByName(string name) => this.dict[name];
+
+        /// <summary>
         /// Returnt een enumerator die door de <see cref="Zorgaanbieder"/>s itereert.
         /// </summary>
         /// <returns>De <see cref="IEnumerator"/>.</returns>
