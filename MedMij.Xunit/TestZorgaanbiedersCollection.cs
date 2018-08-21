@@ -8,7 +8,7 @@ namespace MedMij.Xunit
     using System.Xml;
     using global::Xunit;
 
-    public class TestZorgaanbiedrsCollection
+    public class TestZorgaanbiedersCollection
     {
         [Theory]
         [InlineData(TestData.ZorgaanbiedersCollectionExampleXML)]
@@ -48,7 +48,7 @@ namespace MedMij.Xunit
 
         [Theory]
         [InlineData(TestData.ZorgaanbiedersCollectionURL)]
-        public async Task<ZorgaanbiedersCollection> WhitelistDownload(string uri)
+        public async Task<ZorgaanbiedersCollection> ZorgaanbiedersCollectionDownload(string uri)
         {
             var httpClientFactory = new StringHttpClienFactoryMock(TestData.ZorgaanbiedersCollectionExampleXML);
             return await ZorgaanbiedersCollection.FromURLAsync(new Uri(uri), httpClientFactory);

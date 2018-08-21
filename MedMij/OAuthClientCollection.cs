@@ -1,0 +1,97 @@
+﻿// Copyright (c) Zorgdoc.  All rights reserved.  Licensed under the AGPLv3.
+
+namespace MedMij
+{
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Net.Http;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using System.Xml.Linq;
+    using System.Xml.Schema;
+
+    /// <summary>
+    /// Een OAuth client list zoals beschreven op https://afsprakenstelsel.medmij.nl/
+    /// </summary>
+    public class OAuthClientCollection : IEnumerable<OAuthClient>
+    {
+        private static readonly XNamespace NS = "xmlns://afsprakenstelsel.medmij.nl/oauthclientlist/release2/";
+        private static readonly XName OAuthclientlistRoot = NS + "OAuthclientlist";
+        private static readonly XName OAuthclientName = NS + "OAuthclient";
+        private static readonly XName OrganisatienaamName = NS + "OAuthclientOrganisatienaam";
+        private static readonly XName HostnameName = NS + "Hostname";
+        private static readonly XmlSchemaSet Schemas = XMLUtils.SchemaSetFromResource("OAuthclientlist.xsd", NS);
+
+        private readonly IReadOnlyDictionary<string, OAuthClient> dict;
+
+        private OAuthClientCollection(XDocument doc)
+        {
+            XMLUtils.Validate(doc, Schemas, OAuthclientlistRoot);
+            this.dict = Parse(doc);
+        }
+
+        /// <summary>
+        /// Initialiseert een <see cref="OAuthClientCollection"/> vanuit een string. Parset de string and valideert deze.
+        /// </summary>
+        /// <param name="xmlData">Een string met de zorgaanbiederslijst als XML.</param>
+        /// <returns>De nieuwe <see cref="OAuthClientCollection"/>.</returns>
+        public static OAuthClientCollection FromXMLData(string xmlData)
+        {
+            var doc = XDocument.Parse(xmlData);
+            return new OAuthClientCollection(doc);
+        }
+
+        /// <summary>
+        /// Initialiseert een <see cref="OAuthClientCollection"/> vanuit een URL. Downloadt de lijst, parset en valideert deze.
+        /// </summary>
+        /// <param name="url">Een URL waar de lijst kan worden gedownloadet.</param>
+        /// <param name="httpClientFactory">De context voor de download</param>
+        /// <param name="cancellationToken">Een cancellationtoken kan gebruikt worden om een cancellation door te geven.</param>
+        /// <returns>De nieuwe <see cref="OAuthClientCollection"/>.</returns>
+        public static async Task<OAuthClientCollection> FromURLAsync(Uri url, System.Net.Http.IHttpClientFactory httpClientFactory, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            string data;
+            using (var c = httpClientFactory.CreateClient())
+            {
+                data = await c.GetStringAsync(url, cancellationToken).ConfigureAwait(false);
+            }
+
+            return FromXMLData(data);
+        }
+
+        /// <summary>
+        /// Geeft de <see cref="OAuthClient"/> met de opgegeven organisatienaam.
+        /// </summary>
+        /// <param name="naam">De organisatienaam van de <see cref="OAuthClient"/></param>
+        /// <returns>De gezochte <see cref="OAuthClient"/>.</returns>
+        /// <exception cref="System.Collections.Generic.KeyNotFoundException">Wordt gegenereerd als de naam niet wordt gevonden.</exception>
+        public OAuthClient GetByOrganisatienaam(string naam) => this.dict[naam];
+
+        /// <summary>
+        /// Returnt een enumerator die door de <see cref="OAuthClient"/>s itereert.
+        /// </summary>
+        /// <returns>De <see cref="IEnumerator"/>.</returns>
+        IEnumerator<OAuthClient> IEnumerable<OAuthClient>.GetEnumerator() => this.dict.Values.GetEnumerator();
+
+        /// <summary>
+        /// Returnt een enumerator die door de <see cref="OAuthClient"/>s itereert.
+        /// </summary>
+        /// <returns>De <see cref="IEnumerator"/>.</returns>
+        IEnumerator IEnumerable.GetEnumerator() => this.dict.Values.GetEnumerator();
+
+        private static IReadOnlyDictionary<string, OAuthClient> Parse(XDocument doc)
+        {
+            OAuthClient ParseOAuthclient(XElement x)
+                => new OAuthClient(
+                    organisatienaam: x.Element(OrganisatienaamName).Value,
+                    hostname: x.Element(HostnameName).Value);
+
+            var oauthclients = doc.Descendants(OAuthclientName).Select(ParseOAuthclient);
+            var d = oauthclients.ToDictionary(z => z.Organisatienaam, z => z);
+            return new ReadOnlyDictionary<string, OAuthClient>(d);
+        }
+    }
+}

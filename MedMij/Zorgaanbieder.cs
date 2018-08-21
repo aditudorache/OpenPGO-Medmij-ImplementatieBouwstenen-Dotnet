@@ -7,18 +7,13 @@ namespace MedMij
     /// </summary>
     public class Zorgaanbieder
     {
-        // StyleCop kan geen Nederlands
-        #pragma warning disable SA1623 // PropertySummaryDocumentationMustMatchAccessors
-        #pragma warning disable SA1642 // ConstructorSummaryDocumentationMustBeginWithStandardText
-        /// <summary>
-        /// Initialiseer een nieuwe <see cref="Zorgaanbieder"/>.
-        /// </summary>
-        /// <param name="naam">De unieke en gebruiksvriendelijke naam van een zorgaanbieder</param>
         internal Zorgaanbieder(string naam)
         {
             this.Naam = naam;
         }
 
+        // StyleCop kan geen Nederlands
+        #pragma warning disable SA1623 // PropertySummaryDocumentationMustMatchAccessors
         /// <summary>
         /// Geeft de unieke en gebruiksvriendelijke naam van een zorgaanbieder
         /// </summary>
