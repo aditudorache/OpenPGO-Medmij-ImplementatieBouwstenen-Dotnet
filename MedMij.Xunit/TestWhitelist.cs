@@ -57,7 +57,7 @@ namespace MedMij.Xunit
         public async Task<Whitelist> WhitelistDownload(string uri)
         {
             var httpClientFactory = new StringHttpClienFactoryMock(TestData.WhiltelistExampleXML);
-            return await Whitelist.FromURL(new Uri(uri), httpClientFactory);
+            return await Whitelist.FromURLAsync(new Uri(uri), httpClientFactory);
         }
     }
 }

@@ -47,7 +47,7 @@ namespace MedMij
         /// <param name="httpClientFactory">De context voor de download</param>
         /// <param name="cancellationToken">Een cancellationtoken kan gebruikt worden om een cancellation door te geven.</param>
         /// <returns>De nieuwe <see cref="Whitelist"/>.</returns>
-        public static async Task<Whitelist> FromURL(Uri url, System.Net.Http.IHttpClientFactory httpClientFactory, CancellationToken cancellationToken = default(CancellationToken))
+        public static async Task<Whitelist> FromURLAsync(Uri url, System.Net.Http.IHttpClientFactory httpClientFactory, CancellationToken cancellationToken = default(CancellationToken))
         {
             string data;
             using (var c = httpClientFactory.CreateClient())
