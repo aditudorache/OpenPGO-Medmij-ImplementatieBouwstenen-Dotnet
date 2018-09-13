@@ -2,7 +2,6 @@ dotnet:
   stage: test
   image: 'microsoft/dotnet:latest'
   script:
-    - cd dotnet
     - dotnet restore
     - dotnet build
     - dotnet test MedMij.Xunit
