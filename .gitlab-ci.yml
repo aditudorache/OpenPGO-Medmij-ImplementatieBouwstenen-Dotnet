@@ -1,0 +1,18 @@
+dotnet:
+  stage: test
+  image: 'microsoft/dotnet:latest'
+  script:
+    - cd dotnet
+    - dotnet restore
+    - dotnet build
+    - dotnet test MedMij.Xunit
+
+pages:
+  stage: deploy
+  image: 'tsgkadot/docker-docfx:latest'
+  script:
+    - docfx
+    - mv _site public
+  artifacts:
+    paths:
+      - public
