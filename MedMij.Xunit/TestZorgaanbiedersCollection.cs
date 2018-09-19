@@ -27,6 +27,13 @@ namespace MedMij.Xunit
             foreach (var c in col)
             {
                 System.Console.WriteLine(c.Naam);
+                foreach (var pair in c.Gegevensdiensten)
+                {
+                    System.Console.WriteLine($"{pair.Key} == {pair.Value.Id}");
+                    System.Console.WriteLine(pair.Value.AuthorizationEndpointUri);
+                    System.Console.WriteLine(pair.Value.TokenEndpointUri);
+                }
+                System.Console.WriteLine();
             }
         }
 
@@ -74,6 +81,5 @@ namespace MedMij.Xunit
             var zorgaanbieders = ZorgaanbiedersCollection.FromXMLData(xml);
             Assert.Throws<KeyNotFoundException>(() => zorgaanbieders.GetByName(name));
         }
-
     }
 }

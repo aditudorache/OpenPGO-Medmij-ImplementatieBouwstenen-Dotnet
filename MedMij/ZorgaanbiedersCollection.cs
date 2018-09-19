@@ -22,6 +22,11 @@ namespace MedMij
         private static readonly XName ZorgaanbiederslijstRoot = NS + "Zorgaanbiederslijst";
         private static readonly XName ZorgaanbiederName = NS + "Zorgaanbieder";
         private static readonly XName ZorgaanbiedernaamName = NS + "Zorgaanbiedernaam";
+        private static readonly XName GegevensdienstName = NS + "Gegevensdienst";
+        private static readonly XName GegevensdienstIdName = NS + "GegevensdienstId";
+        private static readonly XName AuthorizationEndpointuriName = NS + "AuthorizationEndpointuri";
+        private static readonly XName TokenEndpointuriName = NS + "TokenEndpointuri";
+
         private static readonly XmlSchemaSet Schemas = XMLUtils.SchemaSetFromResource("Zorgaanbiederslijst.xsd", NS);
 
         private readonly IReadOnlyDictionary<string, Zorgaanbieder> dict;
@@ -83,8 +88,25 @@ namespace MedMij
 
         private static IReadOnlyDictionary<string, Zorgaanbieder> Parse(XDocument doc)
         {
+            Gegevensdienst ParseGegevensdienst(XElement x)
+            {
+                var id = x.Element(GegevensdienstIdName).Value;
+                var authorizationEndpointUri = x.Descendants(AuthorizationEndpointuriName).Single().Value;
+                var tokenEndpointUri = x.Descendants(TokenEndpointuriName).Single().Value;
+                return new Gegevensdienst(
+                    id: id,
+                    authorizationEndpointUri: new Uri(authorizationEndpointUri),
+                    tokenEndpointUri: new Uri(tokenEndpointUri));
+            }
+
             Zorgaanbieder ParseZorgaanbieder(XElement x)
-                => new Zorgaanbieder(naam: x.Element(ZorgaanbiedernaamName).Value);
+            {
+                var naam = x.Element(ZorgaanbiedernaamName).Value;
+                var gegevensdiensten = x.Descendants(GegevensdienstName)
+                                        .Select(e => ParseGegevensdienst(e))
+                                        .ToDictionary(g => g.Id, g => g);
+                return new Zorgaanbieder(naam: naam, gegevensdiensten: gegevensdiensten);
+            }
 
             var zorgaanbieders = doc.Descendants(ZorgaanbiederName).Select(ParseZorgaanbieder);
             var d = zorgaanbieders.ToDictionary(z => z.Naam, z => z);
