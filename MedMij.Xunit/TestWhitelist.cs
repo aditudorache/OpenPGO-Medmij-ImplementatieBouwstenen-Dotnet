@@ -51,13 +51,5 @@ namespace MedMij.Xunit
             var whitelist = Whitelist.FromXMLData(TestData.WhiltelistExampleXML);
             Assert.False(whitelist.Contains(hostname));
         }
-
-        [Theory]
-        [InlineData(TestData.WhitelistURL)]
-        public async Task<Whitelist> WhitelistDownload(string uri)
-        {
-            var httpClientFactory = new StringHttpClienFactoryMock(TestData.WhiltelistExampleXML);
-            return await Whitelist.FromURLAsync(new Uri(uri), httpClientFactory);
-        }
     }
 }

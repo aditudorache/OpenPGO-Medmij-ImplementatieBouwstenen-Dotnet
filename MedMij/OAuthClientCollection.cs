@@ -45,24 +45,6 @@ namespace MedMij
         }
 
         /// <summary>
-        /// Initialiseert een <see cref="OAuthClientCollection"/> vanuit een URL. Downloadt de lijst, parset en valideert deze.
-        /// </summary>
-        /// <param name="url">Een URL waar de lijst kan worden gedownloadet.</param>
-        /// <param name="httpClientFactory">De context voor de download</param>
-        /// <param name="cancellationToken">Een cancellationtoken kan gebruikt worden om een cancellation door te geven.</param>
-        /// <returns>De nieuwe <see cref="OAuthClientCollection"/>.</returns>
-        public static async Task<OAuthClientCollection> FromURLAsync(Uri url, System.Net.Http.IHttpClientFactory httpClientFactory, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            string data;
-            using (var c = httpClientFactory.CreateClient())
-            {
-                data = await c.GetStringAsync(url, cancellationToken).ConfigureAwait(false);
-            }
-
-            return FromXMLData(data);
-        }
-
-        /// <summary>
         /// Geeft de <see cref="OAuthClient"/> met de opgegeven organisatienaam.
         /// </summary>
         /// <param name="naam">De organisatienaam van de <see cref="OAuthClient"/></param>

@@ -49,24 +49,6 @@ namespace MedMij
         }
 
         /// <summary>
-        /// Initialiseert een <see cref="ZorgaanbiedersCollection"/> vanuit een URL. Downloadt de lijst, parset en valideert deze.
-        /// </summary>
-        /// <param name="url">Een URL waar de lijst kan worden gedownloadet.</param>
-        /// <param name="httpClientFactory">De context voor de download</param>
-        /// <param name="cancellationToken">Een cancellationtoken kan gebruikt worden om een cancellation door te geven.</param>
-        /// <returns>De nieuwe <see cref="ZorgaanbiedersCollection"/>.</returns>
-        public static async Task<ZorgaanbiedersCollection> FromURLAsync(Uri url, System.Net.Http.IHttpClientFactory httpClientFactory, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            string data;
-            using (var c = httpClientFactory.CreateClient())
-            {
-                data = await c.GetStringAsync(url, cancellationToken).ConfigureAwait(false);
-            }
-
-            return FromXMLData(data);
-        }
-
-        /// <summary>
         /// Geeft de <see cref="Zorgaanbieder"/> met de opgegeven naam.
         /// </summary>
         /// <param name="name">De naam van de <see cref="Zorgaanbieder"/></param>

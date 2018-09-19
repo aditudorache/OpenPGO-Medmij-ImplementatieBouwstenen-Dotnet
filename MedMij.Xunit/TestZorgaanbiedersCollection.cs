@@ -54,14 +54,6 @@ namespace MedMij.Xunit
         }
 
         [Theory]
-        [InlineData(TestData.ZorgaanbiedersCollectionURL)]
-        public async Task<ZorgaanbiedersCollection> ZorgaanbiedersCollectionDownload(string uri)
-        {
-            var httpClientFactory = new StringHttpClienFactoryMock(TestData.ZorgaanbiedersCollectionExampleXML);
-            return await ZorgaanbiedersCollection.FromURLAsync(new Uri(uri), httpClientFactory);
-        }
-
-        [Theory]
         [InlineData("umcharderwijk@medmij")]
         [InlineData("radiologencentraalflevoland@medmij")]
         public void ZorgaanbiedersCollectionContains(string name)

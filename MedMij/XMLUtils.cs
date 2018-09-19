@@ -38,13 +38,5 @@ namespace MedMij
                 throw new XmlSchemaException($"Wrong root element: got {doc.Root.Name} expected {rootname}");
             }
         }
-
-        internal static async Task<string> GetStringAsync(this HttpClient c, Uri uri, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            using (var r = await c.GetAsync(uri, cancellationToken).ConfigureAwait(false))
-            {
-                return await r.Content.ReadAsStringAsync().ConfigureAwait(false);
-            }
-        }
     }
 }

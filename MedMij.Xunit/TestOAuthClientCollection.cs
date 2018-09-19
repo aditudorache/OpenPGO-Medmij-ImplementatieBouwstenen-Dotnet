@@ -47,14 +47,6 @@ namespace MedMij.Xunit
         }
 
         [Theory]
-        [InlineData(TestData.OAuthClientCollectionURL)]
-        public async Task<OAuthClientCollection> OAuthClientCollectionDownload(string uri)
-        {
-            var httpClientFactory = new StringHttpClienFactoryMock(TestData.OAuthClientCollectionExampleXML);
-            return await OAuthClientCollection.FromURLAsync(new Uri(uri), httpClientFactory);
-        }
-
-        [Theory]
         [InlineData("Unstealth Health Midden-Nederland")]
         [InlineData("De Enige Echte PGO")]
         public void OAuthClientCollectionContains(string name)
