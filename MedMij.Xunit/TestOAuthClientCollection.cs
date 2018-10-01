@@ -7,7 +7,6 @@ namespace MedMij.Xunit
     using System.Threading.Tasks;
     using System.Xml;
     using global::Xunit;
-
     public class TestOAuthClientCollection
     {
         [Theory]

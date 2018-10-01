@@ -70,13 +70,14 @@ namespace MedMij
 
         private static IReadOnlyDictionary<string, Zorgaanbieder> Parse(XDocument doc)
         {
-            Gegevensdienst ParseGegevensdienst(XElement x)
+            Gegevensdienst ParseGegevensdienst(XElement x, string zorgaanbiedernaam)
             {
                 var id = x.Element(GegevensdienstIdName).Value;
                 var authorizationEndpointUri = x.Descendants(AuthorizationEndpointuriName).Single().Value;
                 var tokenEndpointUri = x.Descendants(TokenEndpointuriName).Single().Value;
                 return new Gegevensdienst(
                     id: id,
+                    zorgaanbiedernaam: zorgaanbiedernaam,
                     authorizationEndpointUri: new Uri(authorizationEndpointUri),
                     tokenEndpointUri: new Uri(tokenEndpointUri));
             }
@@ -85,7 +86,7 @@ namespace MedMij
             {
                 var naam = x.Element(ZorgaanbiedernaamName).Value;
                 var gegevensdiensten = x.Descendants(GegevensdienstName)
-                                        .Select(e => ParseGegevensdienst(e))
+                                        .Select(e => ParseGegevensdienst(e, naam))
                                         .ToDictionary(g => g.Id, g => g);
                 return new Zorgaanbieder(naam: naam, gegevensdiensten: gegevensdiensten);
             }

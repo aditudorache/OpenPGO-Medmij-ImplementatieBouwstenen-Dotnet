@@ -7,11 +7,12 @@ namespace MedMij
     /// <summary>
     /// Een gegevensdienst zoals beschreven op https://afsprakenstelsel.medmij.nl/
     /// </summary>
-    public class Gegevensdienst
+    public class Gegevensdienst : IGegevensdienst
     {
-        internal Gegevensdienst(string id, Uri authorizationEndpointUri, Uri tokenEndpointUri)
+        internal Gegevensdienst(string id, string zorgaanbiedernaam, Uri authorizationEndpointUri, Uri tokenEndpointUri)
         {
             this.Id = id;
+            this.Zorgaanbiedernaam = zorgaanbiedernaam;
             this.AuthorizationEndpointUri = authorizationEndpointUri;
             this.TokenEndpointUri = tokenEndpointUri;
         }
@@ -21,6 +22,11 @@ namespace MedMij
         /// Geeft de binnen de zorgaanbieder unieke id van de gegevensdienst
         /// </summary>
         public string Id { get; }
+
+        /// <summary>
+        /// Geeft de naam van de zorgaanbieder van deze gevensdienst. Eindigt altijd op "@medmij"
+        /// </summary>
+        public string Zorgaanbiedernaam { get; }
 
         /// <summary>
         /// Geeft de AuthorizationEndpointUri van deze gevensdienst.
