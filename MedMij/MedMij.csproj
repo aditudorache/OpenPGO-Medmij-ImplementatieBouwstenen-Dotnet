@@ -6,7 +6,7 @@
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <EmbeddedResource Include="*.xsd" />
+    <EmbeddedResource Include="Xsd/*.xsd" />
   </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="stylecop.json" />
