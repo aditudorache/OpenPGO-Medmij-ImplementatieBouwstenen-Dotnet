@@ -6,7 +6,7 @@ namespace MedMij.Xunit
     using global::Xunit;
     using MedMij.Oauth;
 
-    public class TestZAOAuth
+    public class ZAOAuthTest
     {
         [Fact]
         public void TestMakeRedirectURL()

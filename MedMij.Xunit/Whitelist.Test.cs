@@ -7,7 +7,7 @@ namespace MedMij.Xunit
     using System.Xml;
     using global::Xunit;
 
-    public class TestWhitelist
+    public class WhitelistTest
     {
         [Theory]
         [InlineData(TestData.WhiltelistExampleXML)]

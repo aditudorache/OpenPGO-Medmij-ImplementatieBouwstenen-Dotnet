@@ -69,19 +69,19 @@
             Geeft de unieke en gebruiksvriendelijke naam van een "Dienstverleners persoon"
             </summary>
         </member>
-        <member name="T:MedMij.OAuthClientCollection">
+        <member name="T:MedMij.OAuthclientlist">
             <summary>
             Een OAuth client list zoals beschreven op https://afsprakenstelsel.medmij.nl/
             </summary>
         </member>
-        <member name="M:MedMij.OAuthClientCollection.FromXMLData(System.String)">
+        <member name="M:MedMij.OAuthclientlist.FromXMLData(System.String)">
             <summary>
-            Initialiseert een <see cref="T:MedMij.OAuthClientCollection"/> vanuit een string. Parset de string and valideert deze.
+            Initialiseert een <see cref="T:MedMij.OAuthclientlist"/> vanuit een string. Parset de string and valideert deze.
             </summary>
             <param name="xmlData">Een string met de zorgaanbiederslijst als XML.</param>
-            <returns>De nieuwe <see cref="T:MedMij.OAuthClientCollection"/>.</returns>
+            <returns>De nieuwe <see cref="T:MedMij.OAuthclientlist"/>.</returns>
         </member>
-        <member name="M:MedMij.OAuthClientCollection.GetByOrganisatienaam(System.String)">
+        <member name="M:MedMij.OAuthclientlist.GetByOrganisatienaam(System.String)">
             <summary>
             Geeft de <see cref="T:MedMij.OAuthClient"/> met de opgegeven organisatienaam.
             </summary>
@@ -164,19 +164,19 @@
             Geeft de lijst met gegevensdiensten die horen bij deze zorgaanbieder
             </summary>
         </member>
-        <member name="T:MedMij.ZorgaanbiedersCollection">
+        <member name="T:MedMij.Zorgaanbiederslijst">
             <summary>
             Een zorgaanbiederslijst zoals beschreven op https://afsprakenstelsel.medmij.nl/
             </summary>
         </member>
-        <member name="M:MedMij.ZorgaanbiedersCollection.FromXMLData(System.String)">
+        <member name="M:MedMij.Zorgaanbiederslijst.FromXMLData(System.String)">
             <summary>
-            Initialiseert een <see cref="T:MedMij.ZorgaanbiedersCollection"/> vanuit een string. Parset de string and valideert deze.
+            Initialiseert een <see cref="T:MedMij.Zorgaanbiederslijst"/> vanuit een string. Parset de string and valideert deze.
             </summary>
             <param name="xmlData">Een string met de zorgaanbiederslijst als XML.</param>
-            <returns>De nieuwe <see cref="T:MedMij.ZorgaanbiedersCollection"/>.</returns>
+            <returns>De nieuwe <see cref="T:MedMij.Zorgaanbiederslijst"/>.</returns>
         </member>
-        <member name="M:MedMij.ZorgaanbiedersCollection.GetByName(System.String)">
+        <member name="M:MedMij.Zorgaanbiederslijst.GetByName(System.String)">
             <summary>
             Geeft de <see cref="T:MedMij.Zorgaanbieder"/> met de opgegeven naam.
             </summary>

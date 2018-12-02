@@ -7,14 +7,14 @@ namespace MedMij.Xunit
     using System.Threading.Tasks;
     using System.Xml;
     using global::Xunit;
-    public class TestOAuthClientCollection
+    public class OAuthclientlistTest
     {
         [Theory]
         [InlineData(TestData.OAuthClientCollectionExampleXML)]
         [InlineData(TestData.OAuthClientCollectionEmptyExampleXML)]
         public void OAuthClientCollectionParseOK(string xmlData)
         {
-            OAuthClientCollection.FromXMLData(xmlData);
+            OAuthclientlist.FromXMLData(xmlData);
         }
 
         [Theory]
@@ -22,7 +22,7 @@ namespace MedMij.Xunit
         [InlineData(TestData.OAuthClientCollectionEmptyExampleXML)]
         public void OAuthClientCollectionIsIterable(string xmlData)
         {
-            var col = OAuthClientCollection.FromXMLData(xmlData);
+            var col = OAuthclientlist.FromXMLData(xmlData);
             foreach (var c in col.Data)
             {
                 System.Console.WriteLine(c.Organisatienaam);
@@ -33,7 +33,7 @@ namespace MedMij.Xunit
         [InlineData(TestData.InvalidXML)]
         public void OAuthClientCollectionInvalidXML(string xmlData)
         {
-            Assert.ThrowsAny<XmlException>(() => OAuthClientCollection.FromXMLData(xmlData));
+            Assert.ThrowsAny<XmlException>(() => OAuthclientlist.FromXMLData(xmlData));
         }
 
         [Theory]
@@ -42,7 +42,7 @@ namespace MedMij.Xunit
         public void OAuthClientCollectionXSDFail(string xmlData)
         {
             Assert.ThrowsAny<System.Xml.Schema.XmlSchemaException>(
-                () => OAuthClientCollection.FromXMLData(xmlData));
+                () => OAuthclientlist.FromXMLData(xmlData));
         }
 
         [Theory]
@@ -50,7 +50,7 @@ namespace MedMij.Xunit
         [InlineData("De Enige Echte PGO")]
         public void OAuthClientCollectionContains(string name)
         {
-            var OAuthClient = OAuthClientCollection.FromXMLData(TestData.OAuthClientCollectionExampleXML);
+            var OAuthClient = OAuthclientlist.FromXMLData(TestData.OAuthClientCollectionExampleXML);
             Assert.NotNull(OAuthClient.GetByOrganisatienaam(name));
         }
 
@@ -62,7 +62,7 @@ namespace MedMij.Xunit
         [InlineData(TestData.OAuthClientCollectionEmptyExampleXML, "De Enige Echte PGO")]
         public void OAuthClientCollectionNotContains(string xml, string name)
         {
-            var OAuthClient = OAuthClientCollection.FromXMLData(xml);
+            var OAuthClient = OAuthclientlist.FromXMLData(xml);
             Assert.Throws<KeyNotFoundException>(() => OAuthClient.GetByOrganisatienaam(name));
         }
 

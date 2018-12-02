@@ -17,7 +17,7 @@ namespace MedMij
     /// <summary>
     /// Een OAuth client list zoals beschreven op https://afsprakenstelsel.medmij.nl/
     /// </summary>
-    public class OAuthClientCollection
+    public class OAuthclientlist
     {
         private static readonly XNamespace NS = "xmlns://afsprakenstelsel.medmij.nl/oauthclientlist/release2/";
         private static readonly XName OAuthclientlistRoot = NS + "OAuthclientlist";
@@ -28,7 +28,7 @@ namespace MedMij
 
         private readonly List<OAuthClient> data;
 
-        private OAuthClientCollection(XDocument doc)
+        private OAuthclientlist(XDocument doc)
         {
             XMLUtils.Validate(doc, Schemas, OAuthclientlistRoot);
             this.data = Parse(doc);
@@ -37,14 +37,14 @@ namespace MedMij
         public List<OAuthClient> Data => data;
 
         /// <summary>
-        /// Initialiseert een <see cref="OAuthClientCollection"/> vanuit een string. Parset de string and valideert deze.
+        /// Initialiseert een <see cref="OAuthclientlist"/> vanuit een string. Parset de string and valideert deze.
         /// </summary>
         /// <param name="xmlData">Een string met de zorgaanbiederslijst als XML.</param>
-        /// <returns>De nieuwe <see cref="OAuthClientCollection"/>.</returns>
-        public static OAuthClientCollection FromXMLData(string xmlData)
+        /// <returns>De nieuwe <see cref="OAuthclientlist"/>.</returns>
+        public static OAuthclientlist FromXMLData(string xmlData)
         {
             var doc = XDocument.Parse(xmlData);
-            return new OAuthClientCollection(doc);
+            return new OAuthclientlist(doc);
         }
 
         /// <summary>

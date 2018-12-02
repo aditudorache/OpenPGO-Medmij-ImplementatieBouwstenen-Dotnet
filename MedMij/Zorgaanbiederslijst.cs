@@ -17,7 +17,7 @@ namespace MedMij
     /// <summary>
     /// Een zorgaanbiederslijst zoals beschreven op https://afsprakenstelsel.medmij.nl/
     /// </summary>
-    public class ZorgaanbiedersCollection
+    public class Zorgaanbiederslijst
     {
         private static readonly XNamespace NS = "xmlns://afsprakenstelsel.medmij.nl/zorgaanbiederslijst/release2/";
         private static readonly XName ZorgaanbiederslijstRoot = NS + "Zorgaanbiederslijst";
@@ -32,21 +32,21 @@ namespace MedMij
 
         private readonly List<Zorgaanbieder> data;
 
-        private ZorgaanbiedersCollection(XDocument doc)
+        private Zorgaanbiederslijst(XDocument doc)
         {
             XMLUtils.Validate(doc, Schemas, ZorgaanbiederslijstRoot);
             this.data = Parse(doc);
         }
 
         /// <summary>
-        /// Initialiseert een <see cref="ZorgaanbiedersCollection"/> vanuit een string. Parset de string and valideert deze.
+        /// Initialiseert een <see cref="Zorgaanbiederslijst"/> vanuit een string. Parset de string and valideert deze.
         /// </summary>
         /// <param name="xmlData">Een string met de zorgaanbiederslijst als XML.</param>
-        /// <returns>De nieuwe <see cref="ZorgaanbiedersCollection"/>.</returns>
-        public static ZorgaanbiedersCollection FromXMLData(string xmlData)
+        /// <returns>De nieuwe <see cref="Zorgaanbiederslijst"/>.</returns>
+        public static Zorgaanbiederslijst FromXMLData(string xmlData)
         {
             var doc = XDocument.Parse(xmlData);
-            return new ZorgaanbiedersCollection(doc);
+            return new Zorgaanbiederslijst(doc);
         }
 
         public List<Zorgaanbieder> Data => data;

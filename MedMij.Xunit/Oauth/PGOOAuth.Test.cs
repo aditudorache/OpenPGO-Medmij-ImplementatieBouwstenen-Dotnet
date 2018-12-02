@@ -11,7 +11,7 @@ namespace MedMij.Xunit
     using Moq.Protected;
     using MedMij.Oauth;
 
-    public class TestPGOOAuth
+    public class PGOOAuthTest
     {
         [Fact]
         public void TestMakeAuthUri()

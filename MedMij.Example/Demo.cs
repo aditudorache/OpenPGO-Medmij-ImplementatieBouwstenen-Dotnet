@@ -26,7 +26,7 @@ namespace MedMij.Example
                 var oclxml = c.GetStringAsync(OCL_URL);
 
                 Console.WriteLine($"OCL: \n=================");
-                var ocl = MedMij.OAuthClientCollection.FromXMLData(await oclxml);
+                var ocl = MedMij.OAuthclientlist.FromXMLData(await oclxml);
                 var oc = ocl.GetByOrganisatienaam("De Enige Echte PGO");
                 Console.WriteLine($"OAuth hostname: {oc.Hostname}\n");
 
@@ -37,7 +37,7 @@ namespace MedMij.Example
 
 
                 Console.WriteLine($"ZAL: \n=================");
-                var zal = MedMij.ZorgaanbiedersCollection.FromXMLData(await zalxml);
+                var zal = MedMij.Zorgaanbiederslijst.FromXMLData(await zalxml);
                 var za = zal.GetByName("umcharderwijk@medmij");
                 var geg = za.Gegevensdiensten["4"];
                 Console.WriteLine($"AuthorizationEndpointUri: {geg.AuthorizationEndpointUri}");

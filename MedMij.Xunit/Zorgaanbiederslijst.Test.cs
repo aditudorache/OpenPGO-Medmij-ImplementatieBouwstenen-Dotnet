@@ -8,14 +8,14 @@ namespace MedMij.Xunit
     using System.Xml;
     using global::Xunit;
 
-    public class TestZorgaanbiedersCollection
+    public class ZorgaanbiederslijstTest
     {
         [Theory]
         [InlineData(TestData.ZorgaanbiedersCollectionExampleXML)]
         [InlineData(TestData.ZorgaanbiedersCollectionEmptyExampleXML)]
         public void ZorgaanbiedersCollectionParseOK(string xmlData)
         {
-            ZorgaanbiedersCollection.FromXMLData(xmlData);
+            Zorgaanbiederslijst.FromXMLData(xmlData);
         }
 
         [Theory]
@@ -23,7 +23,7 @@ namespace MedMij.Xunit
         [InlineData(TestData.ZorgaanbiedersCollectionEmptyExampleXML)]
         public void ZorgaanbiedersCollectionIsIterable(string xmlData)
         {
-            var col = ZorgaanbiedersCollection.FromXMLData(xmlData);
+            var col = Zorgaanbiederslijst.FromXMLData(xmlData);
             foreach (var c in col.Data)
             {
                 System.Console.WriteLine(c.Naam);
@@ -41,7 +41,7 @@ namespace MedMij.Xunit
         [InlineData(TestData.InvalidXML)]
         public void ZorgaanbiedersCollectionInvalidXML(string xmlData)
         {
-            Assert.ThrowsAny<XmlException>(() => ZorgaanbiedersCollection.FromXMLData(xmlData));
+            Assert.ThrowsAny<XmlException>(() => Zorgaanbiederslijst.FromXMLData(xmlData));
         }
 
         [Theory]
@@ -50,7 +50,7 @@ namespace MedMij.Xunit
         public void ZorgaanbiedersCollectionXSDFail(string xmlData)
         {
             Assert.ThrowsAny<System.Xml.Schema.XmlSchemaException>(
-                () => ZorgaanbiedersCollection.FromXMLData(xmlData));
+                () => Zorgaanbiederslijst.FromXMLData(xmlData));
         }
 
         [Theory]
@@ -58,7 +58,7 @@ namespace MedMij.Xunit
         [InlineData("radiologencentraalflevoland@medmij")]
         public void ZorgaanbiedersCollectionContains(string name)
         {
-            var zorgaanbieders = ZorgaanbiedersCollection.FromXMLData(TestData.ZorgaanbiedersCollectionExampleXML);
+            var zorgaanbieders = Zorgaanbiederslijst.FromXMLData(TestData.ZorgaanbiedersCollectionExampleXML);
             Assert.NotNull(zorgaanbieders.GetByName(name));
         }
 
@@ -70,7 +70,7 @@ namespace MedMij.Xunit
         [InlineData(TestData.ZorgaanbiedersCollectionEmptyExampleXML, "umcharderwijk@medmij")]
         public void ZorgaanbiedersCollectionNotContains(string xml, string name)
         {
-            var zorgaanbieders = ZorgaanbiedersCollection.FromXMLData(xml);
+            var zorgaanbieders = Zorgaanbiederslijst.FromXMLData(xml);
             Assert.Throws<KeyNotFoundException>(() => zorgaanbieders.GetByName(name));
         }
     }
