@@ -1,4 +1,4 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
@@ -6,6 +6,8 @@ MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedMij", "MedMij\MedMij.csproj", "{7E89AD87-6A5E-4926-8140-9CE69E12A08B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedMij.Xunit", "MedMij.Xunit\MedMij.Xunit.csproj", "{BA493A8C-9924-4850-9A0F-E490FDE1DA18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedMij.Example", "MedMij.Example\MedMij.Example.csproj", "{F980831D-0B33-4202-9795-FF494399D94E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,5 +46,17 @@ Global
 		{BA493A8C-9924-4850-9A0F-E490FDE1DA18}.Release|x64.Build.0 = Release|Any CPU
 		{BA493A8C-9924-4850-9A0F-E490FDE1DA18}.Release|x86.ActiveCfg = Release|Any CPU
 		{BA493A8C-9924-4850-9A0F-E490FDE1DA18}.Release|x86.Build.0 = Release|Any CPU
+		{F980831D-0B33-4202-9795-FF494399D94E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F980831D-0B33-4202-9795-FF494399D94E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F980831D-0B33-4202-9795-FF494399D94E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F980831D-0B33-4202-9795-FF494399D94E}.Debug|x64.Build.0 = Debug|Any CPU
+		{F980831D-0B33-4202-9795-FF494399D94E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F980831D-0B33-4202-9795-FF494399D94E}.Debug|x86.Build.0 = Debug|Any CPU
+		{F980831D-0B33-4202-9795-FF494399D94E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F980831D-0B33-4202-9795-FF494399D94E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F980831D-0B33-4202-9795-FF494399D94E}.Release|x64.ActiveCfg = Release|Any CPU
+		{F980831D-0B33-4202-9795-FF494399D94E}.Release|x64.Build.0 = Release|Any CPU
+		{F980831D-0B33-4202-9795-FF494399D94E}.Release|x86.ActiveCfg = Release|Any CPU
+		{F980831D-0B33-4202-9795-FF494399D94E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

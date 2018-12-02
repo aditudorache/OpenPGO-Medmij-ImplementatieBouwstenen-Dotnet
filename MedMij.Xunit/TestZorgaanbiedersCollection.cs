@@ -24,7 +24,7 @@ namespace MedMij.Xunit
         public void ZorgaanbiedersCollectionIsIterable(string xmlData)
         {
             var col = ZorgaanbiedersCollection.FromXMLData(xmlData);
-            foreach (var c in col)
+            foreach (var c in col.Data)
             {
                 System.Console.WriteLine(c.Naam);
                 foreach (var pair in c.Gegevensdiensten)

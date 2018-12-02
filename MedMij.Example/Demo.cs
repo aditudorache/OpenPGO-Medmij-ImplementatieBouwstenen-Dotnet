@@ -25,35 +25,40 @@ namespace MedMij.Example
                 var zalxml = c.GetStringAsync(ZAL_URL);
                 var oclxml = c.GetStringAsync(OCL_URL);
 
+                Console.WriteLine($"OCL: \n=================");
                 var ocl = MedMij.OAuthClientCollection.FromXMLData(await oclxml);
                 var oc = ocl.GetByOrganisatienaam("De Enige Echte PGO");
                 Console.WriteLine($"OAuth hostname: {oc.Hostname}\n");
 
+
+                Console.WriteLine($"Whitelist: \n=================");
                 var whitelist = MedMij.Whitelist.FromXMLData(await whlxml);
                 Console.WriteLine($"Is {oc.Hostname} on whitelist: {whitelist.Contains(oc.Hostname)}\n");
 
+
+                Console.WriteLine($"ZAL: \n=================");
                 var zal = MedMij.ZorgaanbiedersCollection.FromXMLData(await zalxml);
                 var za = zal.GetByName("umcharderwijk@medmij");
                 var geg = za.Gegevensdiensten["4"];
-                Console.WriteLine($"AuthorizationEndpointUri: {geg.AuthorizationEndpointUri}\n");
+                Console.WriteLine($"AuthorizationEndpointUri: {geg.AuthorizationEndpointUri}");
+                Console.WriteLine($"TokenEndpointUri: {geg.TokenEndpointUri}\n");
 
-                Console.WriteLine(
-                    "Link to ZA:\n{0}\n",
-                    MedMij.PGOOAuth.MakeAuthUri(
+                Console.WriteLine($"Authorization: \n=================");
+                var zaAuthenticationUri = MedMij.Oauth.PGOOAuth.MakeAuthUri(
                         gegevensdienst: geg,
                         clientId: oc.Hostname,
                         redirectUri: "https://pgo.example.com/oauth",
-                        state: "abcd"));
+                        state: "abcd");
+                Console.WriteLine("Link to ZA:\n{0}\n", zaAuthenticationUri);
 
-                Console.WriteLine(
-                    "Redirect to PGO:\n{0}\n",
-                    MedMij.ZAOAuth.MakeRedirectURL(
+                var pgoRedirectUrl = MedMij.Oauth.ZAOAuth.MakeRedirectURL(
                         baseUri: "https://pgo.example.com/oauth",
                         state: "abc",
-                        authCode: "xyz"));
+                        authCode: "xyz");
+                Console.WriteLine("Redirect to PGO:\n{0}\n", pgoRedirectUrl);
 
                 Console.WriteLine("Get token:");
-                var tokenTask = MedMij.PGOOAuth.GetAccessToken(
+                var tokenTask = MedMij.Oauth.PGOOAuth.GetAccessToken(
                     gegevensdienst: geg,
                     authorizationCode: "xyz",
                     redirectUri: "https://pgo.example.com/oauth",

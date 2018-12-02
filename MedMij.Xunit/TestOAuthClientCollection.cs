@@ -23,7 +23,7 @@ namespace MedMij.Xunit
         public void OAuthClientCollectionIsIterable(string xmlData)
         {
             var col = OAuthClientCollection.FromXMLData(xmlData);
-            foreach (var c in col)
+            foreach (var c in col.Data)
             {
                 System.Console.WriteLine(c.Organisatienaam);
             }

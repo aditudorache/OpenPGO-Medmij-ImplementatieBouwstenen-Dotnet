@@ -4,6 +4,7 @@ namespace MedMij.Xunit
 {
     using System;
     using global::Xunit;
+    using MedMij.Oauth;
 
     public class TestZAOAuth
     {

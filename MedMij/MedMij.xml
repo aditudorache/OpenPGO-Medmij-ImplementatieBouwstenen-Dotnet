@@ -89,24 +89,12 @@
             <returns>De gezochte <see cref="T:MedMij.OAuthClient"/>.</returns>
             <exception cref="T:System.Collections.Generic.KeyNotFoundException">Wordt gegenereerd als de naam niet wordt gevonden.</exception>
         </member>
-        <member name="M:MedMij.OAuthClientCollection.System#Collections#Generic#IEnumerable{MedMij#OAuthClient}#GetEnumerator">
-            <summary>
-            Returnt een enumerator die door de <see cref="T:MedMij.OAuthClient"/>s itereert.
-            </summary>
-            <returns>De <see cref="T:System.Collections.IEnumerator"/>.</returns>
-        </member>
-        <member name="M:MedMij.OAuthClientCollection.System#Collections#IEnumerable#GetEnumerator">
-            <summary>
-            Returnt een enumerator die door de <see cref="T:MedMij.OAuthClient"/>s itereert.
-            </summary>
-            <returns>De <see cref="T:System.Collections.IEnumerator"/>.</returns>
-        </member>
-        <member name="T:MedMij.PGOOAuth">
+        <member name="T:MedMij.Oauth.PGOOAuth">
             <summary>
             Methodes voor het implementeren van OAuth aan de kant van de PGO
             </summary>
         </member>
-        <member name="M:MedMij.PGOOAuth.MakeAuthUri(MedMij.IGegevensdienst,System.String,System.String,System.String)">
+        <member name="M:MedMij.Oauth.PGOOAuth.MakeAuthUri(MedMij.IGegevensdienst,System.String,System.String,System.String)">
             <summary>
             Geeft een URL waarmee een zorggebruiker een authorization-code kan ophalen bij een zorgaanbieder
             </summary>
@@ -116,7 +104,7 @@
             <param name="redirectUri">De url waar de client weer terugkomt met een authorization-code.</param>
             <param name="state">Applicatie-specifieke state. Gebruik dit om de client weer te herkennen bij terugkomst.</param>
         </member>
-        <member name="M:MedMij.PGOOAuth.GetAccessToken(MedMij.IGegevensdienst,System.String,System.String,System.Net.Http.IHttpClientFactory,System.Threading.CancellationToken)">
+        <member name="M:MedMij.Oauth.PGOOAuth.GetAccessToken(MedMij.IGegevensdienst,System.String,System.String,System.Net.Http.IHttpClientFactory,System.Threading.CancellationToken)">
             <summary>
             Haalt een access token op bij de ZA
             </summary>
@@ -126,6 +114,21 @@
             <param name="httpClientFactory">Wordt gebruikt om een HTTP-verbinding met de ZA op te zetten</param>
             <param name="cancellationToken">Gebruik dit om de HTTP-request te annuleren</param>
             <returns>De access token om bij de patient gegevens op te kunnen halen</returns>
+        </member>
+        <member name="T:MedMij.Oauth.ZAOAuth">
+            <summary>
+            Methodes voor het implementeren van OAuth aan de kant van de zorgaanbieder
+            </summary>
+        </member>
+        <member name="M:MedMij.Oauth.ZAOAuth.MakeRedirectURL(System.String,System.String,System.String)">
+            <summary>
+            Geeft de URL waar de zorggebruiker naartoe geredirect moet worden.
+            Geeft de auth code en de de state mee aan PGO
+            </summary>
+            <param name="baseUri">De url die verwijst naar de PGO. Deze is doorgegeven door de browser van de zorggebruiker.</param>
+            <param name="state">De state die de PGO heeft meegegeven aan de </param>
+            <param name="authCode">de authCode geeft de PGO toegang tot de patientgegevens</param>
+            <returns>De URL met alle benodigde parameters die de PGO nodig heeft om de OAuth flow af te ronden</returns>
         </member>
         <member name="T:MedMij.Whitelist">
             <summary>
@@ -145,21 +148,6 @@
             </summary>
             <param name="hostname">De hostname die gecontroleerd wordt.</param>
             <returns><c>true</c> als de hostname op de lijst staat. Anders <c>false</c>.</returns>
-        </member>
-        <member name="T:MedMij.ZAOAuth">
-            <summary>
-            Methodes voor het implementeren van OAuth aan de kant van de zorgaanbieder
-            </summary>
-        </member>
-        <member name="M:MedMij.ZAOAuth.MakeRedirectURL(System.String,System.String,System.String)">
-            <summary>
-            Geeft de URL waar de zorggebruiker naartoe geredirect moet worden.
-            Geeft de auth code en de de state mee aan PGO
-            </summary>
-            <param name="baseUri">De url die verwijst naar de PGO. Deze is doorgegeven door de browser van de zorggebruiker.</param>
-            <param name="state">De state die de PGO heeft meegegeven aan de </param>
-            <param name="authCode">de authCode geeft de PGO toegang tot de patientgegevens</param>
-            <returns>De URL met alle benodigde parameters die de PGO nodig heeft om de OAuth flow af te ronden</returns>
         </member>
         <member name="T:MedMij.Zorgaanbieder">
             <summary>
@@ -195,18 +183,6 @@
             <param name="name">De naam van de <see cref="T:MedMij.Zorgaanbieder"/></param>
             <returns>De gezochte <see cref="T:MedMij.Zorgaanbieder"/>.</returns>
             <exception cref="T:System.Collections.Generic.KeyNotFoundException">Wordt gegenereerd als de naam niet wordt gevonden.</exception>
-        </member>
-        <member name="M:MedMij.ZorgaanbiedersCollection.System#Collections#Generic#IEnumerable{MedMij#Zorgaanbieder}#GetEnumerator">
-            <summary>
-            Returnt een enumerator die door de <see cref="T:MedMij.Zorgaanbieder"/>s itereert.
-            </summary>
-            <returns>De <see cref="T:System.Collections.IEnumerator"/>.</returns>
-        </member>
-        <member name="M:MedMij.ZorgaanbiedersCollection.System#Collections#IEnumerable#GetEnumerator">
-            <summary>
-            Returnt een enumerator die door de <see cref="T:MedMij.Zorgaanbieder"/>s itereert.
-            </summary>
-            <returns>De <see cref="T:System.Collections.IEnumerator"/>.</returns>
         </member>
         <member name="T:OAuthclientlist">
             <remarks/>
