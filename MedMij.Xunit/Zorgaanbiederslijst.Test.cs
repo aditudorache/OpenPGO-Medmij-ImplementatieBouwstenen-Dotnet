@@ -7,20 +7,19 @@ namespace MedMij.Xunit
     using System.Threading.Tasks;
     using System.Xml;
     using global::Xunit;
-
     public class ZorgaanbiederslijstTest
     {
         [Theory]
-        [InlineData(TestData.ZorgaanbiedersCollectionExampleXML)]
-        [InlineData(TestData.ZorgaanbiedersCollectionEmptyExampleXML)]
+        [InlineData(ZorgaanbiederslijstTestMock.ZorgaanbiedersCollectionExampleXML)]
+        [InlineData(ZorgaanbiederslijstTestMock.ZorgaanbiedersCollectionEmptyExampleXML)]
         public void ZorgaanbiedersCollectionParseOK(string xmlData)
         {
             Zorgaanbiederslijst.FromXMLData(xmlData);
         }
 
         [Theory]
-        [InlineData(TestData.ZorgaanbiedersCollectionExampleXML)]
-        [InlineData(TestData.ZorgaanbiedersCollectionEmptyExampleXML)]
+        [InlineData(ZorgaanbiederslijstTestMock.ZorgaanbiedersCollectionExampleXML)]
+        [InlineData(ZorgaanbiederslijstTestMock.ZorgaanbiedersCollectionEmptyExampleXML)]
         public void ZorgaanbiedersCollectionIsIterable(string xmlData)
         {
             var col = Zorgaanbiederslijst.FromXMLData(xmlData);
@@ -38,15 +37,15 @@ namespace MedMij.Xunit
         }
 
         [Theory]
-        [InlineData(TestData.InvalidXML)]
+        [InlineData(ZorgaanbiederslijstTestMock.InvalidXML)]
         public void ZorgaanbiedersCollectionInvalidXML(string xmlData)
         {
             Assert.ThrowsAny<XmlException>(() => Zorgaanbiederslijst.FromXMLData(xmlData));
         }
 
         [Theory]
-        [InlineData(TestData.ZorgaanbiedersCollectionXSDFail1)]
-        [InlineData(TestData.ZorgaanbiedersCollectionXSDFail2)]
+        [InlineData(ZorgaanbiederslijstTestMock.ZorgaanbiedersCollectionXSDFail1)]
+        [InlineData(ZorgaanbiederslijstTestMock.ZorgaanbiedersCollectionXSDFail2)]
         public void ZorgaanbiedersCollectionXSDFail(string xmlData)
         {
             Assert.ThrowsAny<System.Xml.Schema.XmlSchemaException>(
@@ -58,16 +57,16 @@ namespace MedMij.Xunit
         [InlineData("radiologencentraalflevoland@medmij")]
         public void ZorgaanbiedersCollectionContains(string name)
         {
-            var zorgaanbieders = Zorgaanbiederslijst.FromXMLData(TestData.ZorgaanbiedersCollectionExampleXML);
+            var zorgaanbieders = Zorgaanbiederslijst.FromXMLData(ZorgaanbiederslijstTestMock.ZorgaanbiedersCollectionExampleXML);
             Assert.NotNull(zorgaanbieders.GetByName(name));
         }
 
         [Theory]
-        [InlineData(TestData.ZorgaanbiedersCollectionExampleXML, "umcharderwijk")]
-        [InlineData(TestData.ZorgaanbiedersCollectionExampleXML, "UMCHarderwijk@medmij")]
-        [InlineData(TestData.ZorgaanbiedersCollectionExampleXML, "")]
-        [InlineData(TestData.ZorgaanbiedersCollectionEmptyExampleXML, "")]
-        [InlineData(TestData.ZorgaanbiedersCollectionEmptyExampleXML, "umcharderwijk@medmij")]
+        [InlineData(ZorgaanbiederslijstTestMock.ZorgaanbiedersCollectionExampleXML, "umcharderwijk")]
+        [InlineData(ZorgaanbiederslijstTestMock.ZorgaanbiedersCollectionExampleXML, "UMCHarderwijk@medmij")]
+        [InlineData(ZorgaanbiederslijstTestMock.ZorgaanbiedersCollectionExampleXML, "")]
+        [InlineData(ZorgaanbiederslijstTestMock.ZorgaanbiedersCollectionEmptyExampleXML, "")]
+        [InlineData(ZorgaanbiederslijstTestMock.ZorgaanbiedersCollectionEmptyExampleXML, "umcharderwijk@medmij")]
         public void ZorgaanbiedersCollectionNotContains(string xml, string name)
         {
             var zorgaanbieders = Zorgaanbiederslijst.FromXMLData(xml);

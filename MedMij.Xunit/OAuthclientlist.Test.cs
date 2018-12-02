@@ -10,16 +10,16 @@ namespace MedMij.Xunit
     public class OAuthclientlistTest
     {
         [Theory]
-        [InlineData(TestData.OAuthClientCollectionExampleXML)]
-        [InlineData(TestData.OAuthClientCollectionEmptyExampleXML)]
+        [InlineData(OAuthclientlistTestMock.OAuthClientCollectionExampleXML)]
+        [InlineData(OAuthclientlistTestMock.OAuthClientCollectionEmptyExampleXML)]
         public void OAuthClientCollectionParseOK(string xmlData)
         {
             OAuthclientlist.FromXMLData(xmlData);
         }
 
         [Theory]
-        [InlineData(TestData.OAuthClientCollectionExampleXML)]
-        [InlineData(TestData.OAuthClientCollectionEmptyExampleXML)]
+        [InlineData(OAuthclientlistTestMock.OAuthClientCollectionExampleXML)]
+        [InlineData(OAuthclientlistTestMock.OAuthClientCollectionEmptyExampleXML)]
         public void OAuthClientCollectionIsIterable(string xmlData)
         {
             var col = OAuthclientlist.FromXMLData(xmlData);
@@ -30,15 +30,15 @@ namespace MedMij.Xunit
         }
 
         [Theory]
-        [InlineData(TestData.InvalidXML)]
+        [InlineData(OAuthclientlistTestMock.InvalidXML)]
         public void OAuthClientCollectionInvalidXML(string xmlData)
         {
             Assert.ThrowsAny<XmlException>(() => OAuthclientlist.FromXMLData(xmlData));
         }
 
         [Theory]
-        [InlineData(TestData.OAuthClientCollectionXSDFail1)]
-        [InlineData(TestData.OAuthClientCollectionXSDFail2)]
+        [InlineData(OAuthclientlistTestMock.OAuthClientCollectionXSDFail1)]
+        [InlineData(OAuthclientlistTestMock.OAuthClientCollectionXSDFail2)]
         public void OAuthClientCollectionXSDFail(string xmlData)
         {
             Assert.ThrowsAny<System.Xml.Schema.XmlSchemaException>(
@@ -50,16 +50,16 @@ namespace MedMij.Xunit
         [InlineData("De Enige Echte PGO")]
         public void OAuthClientCollectionContains(string name)
         {
-            var OAuthClient = OAuthclientlist.FromXMLData(TestData.OAuthClientCollectionExampleXML);
+            var OAuthClient = OAuthclientlist.FromXMLData(OAuthclientlistTestMock.OAuthClientCollectionExampleXML);
             Assert.NotNull(OAuthClient.GetByOrganisatienaam(name));
         }
 
         [Theory]
-        [InlineData(TestData.OAuthClientCollectionExampleXML, "De enige Echte PGO")]
-        [InlineData(TestData.OAuthClientCollectionExampleXML, "De Enige Echte PGO ")]
-        [InlineData(TestData.OAuthClientCollectionExampleXML, "")]
-        [InlineData(TestData.OAuthClientCollectionEmptyExampleXML, "")]
-        [InlineData(TestData.OAuthClientCollectionEmptyExampleXML, "De Enige Echte PGO")]
+        [InlineData(OAuthclientlistTestMock.OAuthClientCollectionExampleXML, "De enige Echte PGO")]
+        [InlineData(OAuthclientlistTestMock.OAuthClientCollectionExampleXML, "De Enige Echte PGO ")]
+        [InlineData(OAuthclientlistTestMock.OAuthClientCollectionExampleXML, "")]
+        [InlineData(OAuthclientlistTestMock.OAuthClientCollectionEmptyExampleXML, "")]
+        [InlineData(OAuthclientlistTestMock.OAuthClientCollectionEmptyExampleXML, "De Enige Echte PGO")]
         public void OAuthClientCollectionNotContains(string xml, string name)
         {
             var OAuthClient = OAuthclientlist.FromXMLData(xml);

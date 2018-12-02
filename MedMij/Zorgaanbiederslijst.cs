@@ -28,7 +28,7 @@ namespace MedMij
         private static readonly XName AuthorizationEndpointuriName = NS + "AuthorizationEndpointuri";
         private static readonly XName TokenEndpointuriName = NS + "TokenEndpointuri";
 
-        private static readonly XmlSchemaSet Schemas = XMLUtils.SchemaSetFromResource("Zorgaanbiederslijst.xsd", NS);
+        private static readonly XmlSchemaSet Schemas = XMLUtils.SchemaSetFromResource(Definitions.XsdName(Definitions.Zorgaanbiederslijst), NS);
 
         private readonly List<Zorgaanbieder> data;
 

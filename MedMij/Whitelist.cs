@@ -20,7 +20,7 @@ namespace MedMij
         private static readonly XNamespace NS = "xmlns://afsprakenstelsel.medmij.nl/whitelist/release2/";
         private static readonly XName WhitelistRoot = NS + "Whitelist";
         private static readonly XName MedMijNode = NS + "MedMijNode";
-        private static readonly XmlSchemaSet Schemas = XMLUtils.SchemaSetFromResource("Whitelist.xsd", NS);
+        private static readonly XmlSchemaSet Schemas = XMLUtils.SchemaSetFromResource(Definitions.XsdName(Definitions.Whitelist), NS);
 
         private readonly List<string> data;
 

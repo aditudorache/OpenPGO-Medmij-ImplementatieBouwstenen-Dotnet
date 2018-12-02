@@ -19,12 +19,12 @@ namespace MedMij
     /// </summary>
     public class OAuthclientlist
     {
-        private static readonly XNamespace NS = "xmlns://afsprakenstelsel.medmij.nl/oauthclientlist/release2/";
-        private static readonly XName OAuthclientlistRoot = NS + "OAuthclientlist";
+        private static XNamespace NS => Definitions.OAuthclientlistNamespace;
+        private static XName OAuthclientlistRoot => NS + Definitions.OAuthclientlist;
         private static readonly XName OAuthclientName = NS + "OAuthclient";
         private static readonly XName OrganisatienaamName = NS + "OAuthclientOrganisatienaam";
         private static readonly XName HostnameName = NS + "Hostname";
-        private static readonly XmlSchemaSet Schemas = XMLUtils.SchemaSetFromResource("OAuthclientlist.xsd", NS);
+        private static readonly XmlSchemaSet Schemas = XMLUtils.SchemaSetFromResource(Definitions.XsdName(Definitions.OAuthclientlist), NS);
 
         private readonly List<OAuthClient> data;
 

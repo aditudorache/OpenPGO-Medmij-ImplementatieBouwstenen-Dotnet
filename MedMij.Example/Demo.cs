@@ -12,9 +12,10 @@ namespace MedMij.Example
     {
         async public static Task Run()
         {
-            const string WHITELIST_URL = "http://gids.samenbeter.org/openpgoexamples/1.0/whitelist-voorbeeld-v1.0.xml";
-            const string ZAL_URL = "http://gids.samenbeter.org/openpgoexamples/1.0/zorgaanbiederslijst-voorbeeld-v1.0.xml";
-            const string OCL_URL = "http://gids.samenbeter.org/openpgoexamples/1.0/oauthclientlist-voorbeeld-v1.0.xml";
+            const string WHITELIST_URL = "https://afsprakenstelsel.medmij.nl/download/attachments/22348803/MedMij_Whitelist_example.xml?version=1&modificationDate=1538136425019&api=v2";
+            const string ZAL_URL = "https://afsprakenstelsel.medmij.nl/download/attachments/22348803/MedMij_Zorgaanbiederslijst_example.xml?version=1&modificationDate=1538136425025&api=v2";
+            const string OCL_URL = "https://afsprakenstelsel.medmij.nl/download/attachments/22348803/MedMij_OAuthclientlist_example.xml?version=1&modificationDate=1538136425022&api=v2";
+            const string GNL_URL = "https://afsprakenstelsel.medmij.nl/download/attachments/22348803/MedMij_Gegevensdienstnamenlijst_example.xml?version=1&modificationDate=1538136425017&api=v2";
 
             var serviceCollection = new ServiceCollection().AddHttpClient();
             var factory = serviceCollection.BuildServiceProvider().GetRequiredService<IHttpClientFactory>();
@@ -24,6 +25,7 @@ namespace MedMij.Example
                 var whlxml = c.GetStringAsync(WHITELIST_URL);
                 var zalxml = c.GetStringAsync(ZAL_URL);
                 var oclxml = c.GetStringAsync(OCL_URL);
+                var gnlxml = c.GetStringAsync(GNL_URL);
 
                 Console.WriteLine($"OCL: \n=================");
                 var ocl = MedMij.OAuthclientlist.FromXMLData(await oclxml);
