@@ -1,6 +1,6 @@
-// Copyright (c) Zorgdoc.  All rights reserved.  Licensed under the AGPLv3.
+// Copyright (c) Adrian Tudorache. All Rights Reserved. Licensed under the AGPLv3 (see License.txt for details).
 
-namespace MedMij
+namespace MedMij.Oauth
 {
     using System;
     using System.Collections.Generic;

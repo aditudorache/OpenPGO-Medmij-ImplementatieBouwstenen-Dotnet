@@ -1,4 +1,4 @@
-// Copyright (c) Zorgdoc.  All rights reserved.  Licensed under the AGPLv3.
+// Copyright (c) Adrian Tudorache. All Rights Reserved. Licensed under the AGPLv3 (see License.txt for details).
 
 namespace MedMij
 {
@@ -10,6 +10,7 @@ namespace MedMij
     using System.Threading.Tasks;
     using System.Xml.Linq;
     using System.Xml.Schema;
+    using MedMij.Utils;
 
     /// <summary>
     /// Een whitelist zoals beschreven op https://afsprakenstelsel.medmij.nl/
@@ -19,15 +20,17 @@ namespace MedMij
         private static readonly XNamespace NS = "xmlns://afsprakenstelsel.medmij.nl/whitelist/release2/";
         private static readonly XName WhitelistRoot = NS + "Whitelist";
         private static readonly XName MedMijNode = NS + "MedMijNode";
-        private static readonly XmlSchemaSet Schemas = XMLUtils.SchemaSetFromResource("Whitelist.xsd", NS);
+        private static readonly XmlSchemaSet Schemas = XMLUtils.SchemaSetFromResource(Definitions.XsdName(Definitions.Whitelist), NS);
 
-        private readonly HashSet<string> hosts;
+        private readonly List<string> data;
 
         private Whitelist(XDocument doc)
         {
             XMLUtils.Validate(doc, Schemas, WhitelistRoot);
-            this.hosts = Parse(doc);
+            this.data = Parse(doc);
         }
+
+        public List<string> Data => data;
 
         /// <summary>
         /// Initialiseert een <see cref="Whitelist"/> vanuit een string. Parset de string and valideert deze.
@@ -45,9 +48,9 @@ namespace MedMij
         /// </summary>
         /// <param name="hostname">De hostname die gecontroleerd wordt.</param>
         /// <returns><c>true</c> als de hostname op de lijst staat. Anders <c>false</c>.</returns>
-        public bool Contains(string hostname) => this.hosts.Contains(hostname);
+        public bool Contains(string hostname) => this.data.Contains(hostname);
 
-        private static HashSet<string> Parse(XDocument doc)
-            => new HashSet<string>(doc.Descendants(MedMijNode).Select(n => n.Value));
+        private static List<string> Parse(XDocument doc)
+            => doc.Descendants(MedMijNode).Select(n => n.Value).ToList();
     }
 }

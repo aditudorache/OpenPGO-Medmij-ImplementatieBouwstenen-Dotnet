@@ -1,4 +1,4 @@
-// Copyright (c) Zorgdoc.  All Rights Reserved.  Licensed under the AGPLv3.
+// Copyright (c) Adrian Tudorache. All Rights Reserved. Licensed under the AGPLv3 (see License.txt for details).
 
 namespace MedMij.Xunit
 {
@@ -9,8 +9,9 @@ namespace MedMij.Xunit
     using global::Xunit;
     using Moq;
     using Moq.Protected;
+    using MedMij.Oauth;
 
-    public class TestPGOOAuth
+    public class PGOOAuthTest
     {
         [Fact]
         public void TestMakeAuthUri()

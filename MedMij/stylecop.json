@@ -3,7 +3,7 @@
   "settings": {
     "documentationRules": {
       "xmlHeader": false,
-      "copyrightText": "Copyright (c) Zorgdoc.  All rights reserved.  Licensed under the AGPLv3.",
+      "copyrightText": "Copyright (c) Adrian Tudorache. All Rights Reserved. Licensed under the AGPLv3 (see License.txt for details).",
       "documentationCulture": "nl-NL",
       "documentInternalElements": false
     }

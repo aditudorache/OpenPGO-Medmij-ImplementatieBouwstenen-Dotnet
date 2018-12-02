@@ -1,4 +1,4 @@
-// Copyright (c) Zorgdoc.  All rights reserved.  Licensed under the AGPLv3.
+// Copyright (c) Adrian Tudorache. All Rights Reserved. Licensed under the AGPLv3 (see License.txt for details).
 
 namespace MedMij
 {
@@ -12,11 +12,12 @@ namespace MedMij
     using System.Threading.Tasks;
     using System.Xml.Linq;
     using System.Xml.Schema;
+    using MedMij.Utils;
 
     /// <summary>
     /// Een zorgaanbiederslijst zoals beschreven op https://afsprakenstelsel.medmij.nl/
     /// </summary>
-    public class ZorgaanbiedersCollection : IEnumerable<Zorgaanbieder>
+    public class Zorgaanbiederslijst
     {
         private static readonly XNamespace NS = "xmlns://afsprakenstelsel.medmij.nl/zorgaanbiederslijst/release2/";
         private static readonly XName ZorgaanbiederslijstRoot = NS + "Zorgaanbiederslijst";
@@ -27,26 +28,28 @@ namespace MedMij
         private static readonly XName AuthorizationEndpointuriName = NS + "AuthorizationEndpointuri";
         private static readonly XName TokenEndpointuriName = NS + "TokenEndpointuri";
 
-        private static readonly XmlSchemaSet Schemas = XMLUtils.SchemaSetFromResource("Zorgaanbiederslijst.xsd", NS);
+        private static readonly XmlSchemaSet Schemas = XMLUtils.SchemaSetFromResource(Definitions.XsdName(Definitions.Zorgaanbiederslijst), NS);
 
-        private readonly IReadOnlyDictionary<string, Zorgaanbieder> dict;
+        private readonly List<Zorgaanbieder> data;
 
-        private ZorgaanbiedersCollection(XDocument doc)
+        private Zorgaanbiederslijst(XDocument doc)
         {
             XMLUtils.Validate(doc, Schemas, ZorgaanbiederslijstRoot);
-            this.dict = Parse(doc);
+            this.data = Parse(doc);
         }
 
         /// <summary>
-        /// Initialiseert een <see cref="ZorgaanbiedersCollection"/> vanuit een string. Parset de string and valideert deze.
+        /// Initialiseert een <see cref="Zorgaanbiederslijst"/> vanuit een string. Parset de string and valideert deze.
         /// </summary>
         /// <param name="xmlData">Een string met de zorgaanbiederslijst als XML.</param>
-        /// <returns>De nieuwe <see cref="ZorgaanbiedersCollection"/>.</returns>
-        public static ZorgaanbiedersCollection FromXMLData(string xmlData)
+        /// <returns>De nieuwe <see cref="Zorgaanbiederslijst"/>.</returns>
+        public static Zorgaanbiederslijst FromXMLData(string xmlData)
         {
             var doc = XDocument.Parse(xmlData);
-            return new ZorgaanbiedersCollection(doc);
+            return new Zorgaanbiederslijst(doc);
         }
+
+        public List<Zorgaanbieder> Data => data;
 
         /// <summary>
         /// Geeft de <see cref="Zorgaanbieder"/> met de opgegeven naam.
@@ -54,21 +57,15 @@ namespace MedMij
         /// <param name="name">De naam van de <see cref="Zorgaanbieder"/></param>
         /// <returns>De gezochte <see cref="Zorgaanbieder"/>.</returns>
         /// <exception cref="System.Collections.Generic.KeyNotFoundException">Wordt gegenereerd als de naam niet wordt gevonden.</exception>
-        public Zorgaanbieder GetByName(string name) => this.dict[name];
+        public Zorgaanbieder GetByName(string name)
+        {
+            var zorgaanbieder = this.data.FirstOrDefault(p => p.Naam == name);
+            if (zorgaanbieder == null)
+                throw new KeyNotFoundException();
+            return zorgaanbieder;
+        }
 
-        /// <summary>
-        /// Returnt een enumerator die door de <see cref="Zorgaanbieder"/>s itereert.
-        /// </summary>
-        /// <returns>De <see cref="IEnumerator"/>.</returns>
-        IEnumerator<Zorgaanbieder> IEnumerable<Zorgaanbieder>.GetEnumerator() => this.dict.Values.GetEnumerator();
-
-        /// <summary>
-        /// Returnt een enumerator die door de <see cref="Zorgaanbieder"/>s itereert.
-        /// </summary>
-        /// <returns>De <see cref="IEnumerator"/>.</returns>
-        IEnumerator IEnumerable.GetEnumerator() => this.dict.Values.GetEnumerator();
-
-        private static IReadOnlyDictionary<string, Zorgaanbieder> Parse(XDocument doc)
+        private static List<Zorgaanbieder> Parse(XDocument doc)
         {
             Gegevensdienst ParseGegevensdienst(XElement x, string zorgaanbiedernaam)
             {
@@ -92,8 +89,7 @@ namespace MedMij
             }
 
             var zorgaanbieders = doc.Descendants(ZorgaanbiederName).Select(ParseZorgaanbieder);
-            var d = zorgaanbieders.ToDictionary(z => z.Naam, z => z);
-            return new ReadOnlyDictionary<string, Zorgaanbieder>(d);
+            return zorgaanbieders.ToList();
         }
     }
 }

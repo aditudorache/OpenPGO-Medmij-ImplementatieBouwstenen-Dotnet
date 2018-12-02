@@ -1,0 +1,188 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MedMij</name>
+    </assembly>
+    <members>
+        <member name="T:MedMij.Gegevensdienst">
+            <summary>
+            Een gegevensdienst zoals beschreven op https://afsprakenstelsel.medmij.nl/
+            </summary>
+        </member>
+        <member name="P:MedMij.Gegevensdienst.Id">
+            <summary>
+            Geeft de binnen de zorgaanbieder unieke id van de gegevensdienst
+            </summary>
+        </member>
+        <member name="P:MedMij.Gegevensdienst.Zorgaanbiedernaam">
+            <summary>
+            Geeft de naam van de zorgaanbieder van deze gevensdienst. Eindigt altijd op "@medmij"
+            </summary>
+        </member>
+        <member name="P:MedMij.Gegevensdienst.AuthorizationEndpointUri">
+            <summary>
+            Geeft de AuthorizationEndpointUri van deze gevensdienst.
+            </summary>
+        </member>
+        <member name="P:MedMij.Gegevensdienst.TokenEndpointUri">
+            <summary>
+            Geeft de TokenEndpointUri van deze gevensdienst.
+            </summary>
+        </member>
+        <member name="T:MedMij.IGegevensdienst">
+            <summary>
+            Een gegevensdienst zoals beschreven op https://afsprakenstelsel.medmij.nl/
+            </summary>
+        </member>
+        <member name="P:MedMij.IGegevensdienst.Id">
+            <summary>
+            Geeft de Id van deze gevensdienst.
+            </summary>
+        </member>
+        <member name="P:MedMij.IGegevensdienst.Zorgaanbiedernaam">
+            <summary>
+            Geeft de naam van de zorgaanbieder van deze gevensdienst. Eindigt altijd op "@medmij"
+            </summary>
+        </member>
+        <member name="P:MedMij.IGegevensdienst.AuthorizationEndpointUri">
+            <summary>
+            Geeft de AuthorizationEndpointUri van deze gevensdienst.
+            </summary>
+        </member>
+        <member name="P:MedMij.IGegevensdienst.TokenEndpointUri">
+            <summary>
+            Geeft de TokenEndpointUri van deze gevensdienst.
+            </summary>
+        </member>
+        <member name="T:MedMij.OAuthClient">
+            <summary>
+            Een OAuth client zoals beschreven op https://afsprakenstelsel.medmij.nl/
+            </summary>
+        </member>
+        <member name="P:MedMij.OAuthClient.Hostname">
+            <summary>
+            Geeft de hostname van een OAuth Client van een "Dienstverleners persoon"
+            </summary>
+        </member>
+        <member name="P:MedMij.OAuthClient.Organisatienaam">
+            <summary>
+            Geeft de unieke en gebruiksvriendelijke naam van een "Dienstverleners persoon"
+            </summary>
+        </member>
+        <member name="T:MedMij.OAuthclientlist">
+            <summary>
+            Een OAuth client list zoals beschreven op https://afsprakenstelsel.medmij.nl/
+            </summary>
+        </member>
+        <member name="M:MedMij.OAuthclientlist.FromXMLData(System.String)">
+            <summary>
+            Initialiseert een <see cref="T:MedMij.OAuthclientlist"/> vanuit een string. Parset de string and valideert deze.
+            </summary>
+            <param name="xmlData">Een string met de zorgaanbiederslijst als XML.</param>
+            <returns>De nieuwe <see cref="T:MedMij.OAuthclientlist"/>.</returns>
+        </member>
+        <member name="M:MedMij.OAuthclientlist.GetByOrganisatienaam(System.String)">
+            <summary>
+            Geeft de <see cref="T:MedMij.OAuthClient"/> met de opgegeven organisatienaam.
+            </summary>
+            <param name="naam">De organisatienaam van de <see cref="T:MedMij.OAuthClient"/></param>
+            <returns>De gezochte <see cref="T:MedMij.OAuthClient"/>.</returns>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">Wordt gegenereerd als de naam niet wordt gevonden.</exception>
+        </member>
+        <member name="T:MedMij.Oauth.PGOOAuth">
+            <summary>
+            Methodes voor het implementeren van OAuth aan de kant van de PGO
+            </summary>
+        </member>
+        <member name="M:MedMij.Oauth.PGOOAuth.MakeAuthUri(MedMij.IGegevensdienst,System.String,System.String,System.String)">
+            <summary>
+            Geeft een URL waarmee een zorggebruiker een authorization-code kan ophalen bij een zorgaanbieder
+            </summary>
+            <returns>De Uri waar de client gaat inloggen.</returns>
+            <param name="gegevensdienst">De gegevensdienst waar de zorggebruiker gaat inloggen.</param>
+            <param name="clientId">De clientId van deze PGO.</param>
+            <param name="redirectUri">De url waar de client weer terugkomt met een authorization-code.</param>
+            <param name="state">Applicatie-specifieke state. Gebruik dit om de client weer te herkennen bij terugkomst.</param>
+        </member>
+        <member name="M:MedMij.Oauth.PGOOAuth.GetAccessToken(MedMij.IGegevensdienst,System.String,System.String,System.Net.Http.IHttpClientFactory,System.Threading.CancellationToken)">
+            <summary>
+            Haalt een access token op bij de ZA
+            </summary>
+            <param name="gegevensdienst">De gegevensdienst waarvoor je de access token nodig hebt</param>
+            <param name="authorizationCode">De authorization-code die je hebt ontvangen van de zorggebruiker</param>
+            <param name="redirectUri">Dezelfde waarde als in de voorafgaande authorization request</param>
+            <param name="httpClientFactory">Wordt gebruikt om een HTTP-verbinding met de ZA op te zetten</param>
+            <param name="cancellationToken">Gebruik dit om de HTTP-request te annuleren</param>
+            <returns>De access token om bij de patient gegevens op te kunnen halen</returns>
+        </member>
+        <member name="T:MedMij.Oauth.ZAOAuth">
+            <summary>
+            Methodes voor het implementeren van OAuth aan de kant van de zorgaanbieder
+            </summary>
+        </member>
+        <member name="M:MedMij.Oauth.ZAOAuth.MakeRedirectURL(System.String,System.String,System.String)">
+            <summary>
+            Geeft de URL waar de zorggebruiker naartoe geredirect moet worden.
+            Geeft de auth code en de de state mee aan PGO
+            </summary>
+            <param name="baseUri">De url die verwijst naar de PGO. Deze is doorgegeven door de browser van de zorggebruiker.</param>
+            <param name="state">De state die de PGO heeft meegegeven aan de </param>
+            <param name="authCode">de authCode geeft de PGO toegang tot de patientgegevens</param>
+            <returns>De URL met alle benodigde parameters die de PGO nodig heeft om de OAuth flow af te ronden</returns>
+        </member>
+        <member name="T:MedMij.Whitelist">
+            <summary>
+            Een whitelist zoals beschreven op https://afsprakenstelsel.medmij.nl/
+            </summary>
+        </member>
+        <member name="M:MedMij.Whitelist.FromXMLData(System.String)">
+            <summary>
+            Initialiseert een <see cref="T:MedMij.Whitelist"/> vanuit een string. Parset de string and valideert deze.
+            </summary>
+            <param name="xmlData">Een string met de whitelist als XML.</param>
+            <returns>De nieuwe <see cref="T:MedMij.Whitelist"/>.</returns>
+        </member>
+        <member name="M:MedMij.Whitelist.Contains(System.String)">
+            <summary>
+            Bepaalt of een <see cref="T:MedMij.Whitelist"/> een bepaalde hostname bevat.
+            </summary>
+            <param name="hostname">De hostname die gecontroleerd wordt.</param>
+            <returns><c>true</c> als de hostname op de lijst staat. Anders <c>false</c>.</returns>
+        </member>
+        <member name="T:MedMij.Zorgaanbieder">
+            <summary>
+            Een zorgaanbieder zoals beschreven op https://afsprakenstelsel.medmij.nl/
+            </summary>
+        </member>
+        <member name="P:MedMij.Zorgaanbieder.Naam">
+            <summary>
+            Geeft de unieke en gebruiksvriendelijke naam van een zorgaanbieder
+            </summary>
+        </member>
+        <member name="P:MedMij.Zorgaanbieder.Gegevensdiensten">
+            <summary>
+            Geeft de lijst met gegevensdiensten die horen bij deze zorgaanbieder
+            </summary>
+        </member>
+        <member name="T:MedMij.Zorgaanbiederslijst">
+            <summary>
+            Een zorgaanbiederslijst zoals beschreven op https://afsprakenstelsel.medmij.nl/
+            </summary>
+        </member>
+        <member name="M:MedMij.Zorgaanbiederslijst.FromXMLData(System.String)">
+            <summary>
+            Initialiseert een <see cref="T:MedMij.Zorgaanbiederslijst"/> vanuit een string. Parset de string and valideert deze.
+            </summary>
+            <param name="xmlData">Een string met de zorgaanbiederslijst als XML.</param>
+            <returns>De nieuwe <see cref="T:MedMij.Zorgaanbiederslijst"/>.</returns>
+        </member>
+        <member name="M:MedMij.Zorgaanbiederslijst.GetByName(System.String)">
+            <summary>
+            Geeft de <see cref="T:MedMij.Zorgaanbieder"/> met de opgegeven naam.
+            </summary>
+            <param name="name">De naam van de <see cref="T:MedMij.Zorgaanbieder"/></param>
+            <returns>De gezochte <see cref="T:MedMij.Zorgaanbieder"/>.</returns>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">Wordt gegenereerd als de naam niet wordt gevonden.</exception>
+        </member>
+    </members>
+</doc>

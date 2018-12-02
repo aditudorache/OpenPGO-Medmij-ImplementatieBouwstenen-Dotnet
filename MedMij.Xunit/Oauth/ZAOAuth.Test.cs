@@ -1,11 +1,12 @@
-// Copyright (c) Zorgdoc.  All Rights Reserved.  Licensed under the AGPLv3.
+// Copyright (c) Adrian Tudorache. All Rights Reserved. Licensed under the AGPLv3 (see License.txt for details).
 
 namespace MedMij.Xunit
 {
     using System;
     using global::Xunit;
+    using MedMij.Oauth;
 
-    public class TestZAOAuth
+    public class ZAOAuthTest
     {
         [Fact]
         public void TestMakeRedirectURL()

@@ -1,6 +1,6 @@
-// Copyright (c) Zorgdoc.  All rights reserved.  Licensed under the AGPLv3.
+// Copyright (c) Adrian Tudorache. All Rights Reserved. Licensed under the AGPLv3 (see License.txt for details).
 
-namespace MedMij
+namespace MedMij.Utils
 {
     using System;
     using System.Net.Http;
@@ -15,7 +15,7 @@ namespace MedMij
     {
         internal static XmlSchemaSet SchemaSetFromResource(string name, XNamespace ns)
         {
-            var resourcename = $"MedMij.{name}";
+            var resourcename = $"MedMij.Xsd.{name}";
             var resource = typeof(XMLUtils).Assembly.GetManifestResourceStream(resourcename);
             if (resource == null)
             {
