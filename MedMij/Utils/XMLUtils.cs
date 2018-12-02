@@ -1,6 +1,6 @@
 // Copyright (c) Zorgdoc.  All rights reserved.  Licensed under the AGPLv3.
 
-namespace MedMij
+namespace MedMij.Utils
 {
     using System;
     using System.Net.Http;

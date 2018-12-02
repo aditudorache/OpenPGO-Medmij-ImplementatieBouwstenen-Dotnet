@@ -12,6 +12,7 @@ namespace MedMij
     using System.Threading.Tasks;
     using System.Xml.Linq;
     using System.Xml.Schema;
+    using MedMij.Utils;
 
     /// <summary>
     /// Een zorgaanbiederslijst zoals beschreven op https://afsprakenstelsel.medmij.nl/

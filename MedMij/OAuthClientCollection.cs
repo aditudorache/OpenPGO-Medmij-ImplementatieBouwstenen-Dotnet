@@ -12,6 +12,7 @@ namespace MedMij
     using System.Threading.Tasks;
     using System.Xml.Linq;
     using System.Xml.Schema;
+    using MedMij.Utils;
 
     /// <summary>
     /// Een OAuth client list zoals beschreven op https://afsprakenstelsel.medmij.nl/
