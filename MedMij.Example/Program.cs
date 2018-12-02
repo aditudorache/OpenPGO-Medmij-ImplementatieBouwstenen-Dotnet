@@ -1,15 +1,18 @@
 ﻿// Copyright (c) Adrian Tudorache. All Rights Reserved. Licensed under the AGPLv3 (see License.txt for details).
 
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MedMij.Example
 {
     class Program
     {
-        static void Main(string[] args)
+        async static Task Main(string[] args)
         {
             Console.WriteLine("Start demo consumers for OpenPGO-Medmij-DotNet!");
-            Demo.Run();
+            await Demo.Run();
+            Console.WriteLine("End demo consumers for OpenPGO-Medmij-DotNet!");
         }
     }
 }
