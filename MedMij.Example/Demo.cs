@@ -35,7 +35,7 @@ namespace MedMij.Example
 
                 Console.WriteLine($"Whitelist: \n=================");
                 var whitelist = MedMij.Whitelist.FromXMLData(await whlxml);
-                Console.WriteLine($"Is {oc.Hostname} on whitelist: {whitelist.Contains(oc.Hostname)}\n");
+                Console.WriteLine($"Is {oc.Hostname} on whitelist: {whitelist.IsMedMijNode(oc.Hostname)}\n");
 
 
                 Console.WriteLine($"ZAL: \n=================");
@@ -44,6 +44,11 @@ namespace MedMij.Example
                 var geg = za.Gegevensdiensten["4"];
                 Console.WriteLine($"AuthorizationEndpointUri: {geg.AuthorizationEndpointUri}");
                 Console.WriteLine($"TokenEndpointUri: {geg.TokenEndpointUri}\n");
+
+                Console.WriteLine($"GNL: \n=================");
+                var gnl = MedMij.Gegevensdienstnamenlijst.FromXMLData(await gnlxml);
+                var gn = gnl.GetMapIdToName()["2"];
+                Console.WriteLine($"Weergavenaam : {gn}");
 
                 Console.WriteLine($"Authorization: \n=================");
                 var zaAuthenticationUri = MedMij.Oauth.PGOOAuth.MakeAuthUri(

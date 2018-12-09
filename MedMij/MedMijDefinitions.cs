@@ -1,8 +1,8 @@
-// Copyright (c) Adrian Tudorache. All Rights Reserved. Licensed under the AGPLv3 (see License.txt for details).
+﻿// Copyright (c) Adrian Tudorache. All Rights Reserved. Licensed under the AGPLv3 (see License.txt for details).
 
 namespace MedMij
 {
-    public class Definitions
+    internal class MedMijDefinitions
     {
         public const string Gegevensdienstnamenlijst = "Gegevensdienstnamenlijst";
         public const string GegevensdienstnamenlijstNamespace = "xmlns://afsprakenstelsel.medmij.nl/gegevensdienstnamenlijst/release1/";

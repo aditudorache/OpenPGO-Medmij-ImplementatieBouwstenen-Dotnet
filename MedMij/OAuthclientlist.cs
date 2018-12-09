@@ -17,24 +17,21 @@ namespace MedMij
     /// <summary>
     /// Een OAuth client list zoals beschreven op https://afsprakenstelsel.medmij.nl/
     /// </summary>
-    public class OAuthclientlist
+    public class OAuthclientlist : MedMijListBase<OAuthClient>
     {
-        private static XNamespace NS => Definitions.OAuthclientlistNamespace;
-        private static XName OAuthclientlistRoot => NS + Definitions.OAuthclientlist;
         private static readonly XName OAuthclientName = NS + "OAuthclient";
         private static readonly XName OrganisatienaamName = NS + "OAuthclientOrganisatienaam";
         private static readonly XName HostnameName = NS + "Hostname";
-        private static readonly XmlSchemaSet Schemas = XMLUtils.SchemaSetFromResource(Definitions.XsdName(Definitions.OAuthclientlist), NS);
-
-        private readonly List<OAuthClient> data;
+        private static readonly XmlSchemaSet Schemas = XMLUtils.SchemaSetFromResource(MedMijDefinitions.XsdName(MedMijDefinitions.OAuthclientlist), NS);
 
         private OAuthclientlist(XDocument doc)
         {
             XMLUtils.Validate(doc, Schemas, OAuthclientlistRoot);
-            this.data = Parse(doc);
+            Data = ParseXml(doc);
         }
 
-        public List<OAuthClient> Data => data;
+        private static XNamespace NS => MedMijDefinitions.OAuthclientlistNamespace;
+        private static XName OAuthclientlistRoot => NS + MedMijDefinitions.OAuthclientlist;
 
         /// <summary>
         /// Initialiseert een <see cref="OAuthclientlist"/> vanuit een string. Parset de string and valideert deze.
@@ -55,14 +52,19 @@ namespace MedMij
         /// <exception cref="System.Collections.Generic.KeyNotFoundException">Wordt gegenereerd als de naam niet wordt gevonden.</exception>
         public OAuthClient GetByOrganisatienaam(string naam)
         {
-            var oauthClient = this.data.FirstOrDefault(p => p.Organisatienaam == naam);
+            var oauthClient = Data.FirstOrDefault(p => p.Organisatienaam == naam);
             if (oauthClient == null)
                 throw new KeyNotFoundException();
 
             return oauthClient;
         }
 
-        private static List<OAuthClient> Parse(XDocument doc)
+        /// <summary>
+        /// Parses the xml document to the list
+        /// </summary>
+        /// <param name="doc">The xml document</param>
+        /// <returns>A list with data</returns>
+        protected override List<OAuthClient> ParseXml(XDocument doc)
         {
             OAuthClient ParseOAuthclient(XElement x)
                 => new OAuthClient(
