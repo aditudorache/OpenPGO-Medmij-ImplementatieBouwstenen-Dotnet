@@ -29,6 +29,28 @@
             Geeft de TokenEndpointUri van deze gevensdienst.
             </summary>
         </member>
+        <member name="T:MedMij.Gegevensdinstnaam">
+            <summary>
+            The gegevensdienstnaam. see definition on https://afsprakenstelsel.medmij.nl/
+            </summary>
+        </member>
+        <member name="T:MedMij.Gegevensdienstnamenlijst">
+            <summary>
+            Een gegevensdienstnamenlijst zoals beschreven op https://afsprakenstelsel.medmij.nl/
+            </summary>
+        </member>
+        <member name="M:MedMij.Gegevensdienstnamenlijst.FromXMLData(System.String)">
+            <summary>
+            Initialiseert een <see cref="T:MedMij.Gegevensdienstnamenlijst"/> vanuit een string. Parset de string and valideert deze.
+            </summary>
+            <param name="xmlData">Een string met de zorgaanbiederslijst als XML.</param>
+            <returns>De nieuwe <see cref="T:MedMij.Gegevensdienstnamenlijst"/>.</returns>
+        </member>
+        <member name="M:MedMij.Gegevensdienstnamenlijst.GetMapIdToName">
+            <summary>
+            Returns a dictionary with the Gegevensdinstnaam.Weergave
+            </summary>
+        </member>
         <member name="T:MedMij.IGegevensdienst">
             <summary>
             Een gegevensdienst zoals beschreven op https://afsprakenstelsel.medmij.nl/
