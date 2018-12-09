@@ -17,7 +17,7 @@ namespace MedMij
     /// <summary>
     /// Een zorgaanbiederslijst zoals beschreven op https://afsprakenstelsel.medmij.nl/
     /// </summary>
-    public class Zorgaanbiederslijst
+    public class Zorgaanbiederslijst : MedMijListBase<Zorgaanbieder>
     {
         private static readonly XNamespace NS = "xmlns://afsprakenstelsel.medmij.nl/zorgaanbiederslijst/release2/";
         private static readonly XName ZorgaanbiederslijstRoot = NS + "Zorgaanbiederslijst";
@@ -30,12 +30,10 @@ namespace MedMij
 
         private static readonly XmlSchemaSet Schemas = XMLUtils.SchemaSetFromResource(Definitions.XsdName(Definitions.Zorgaanbiederslijst), NS);
 
-        private readonly List<Zorgaanbieder> data;
-
         private Zorgaanbiederslijst(XDocument doc)
         {
             XMLUtils.Validate(doc, Schemas, ZorgaanbiederslijstRoot);
-            this.data = Parse(doc);
+            Data = ParseXml(doc);
         }
 
         /// <summary>
@@ -49,8 +47,6 @@ namespace MedMij
             return new Zorgaanbiederslijst(doc);
         }
 
-        public List<Zorgaanbieder> Data => data;
-
         /// <summary>
         /// Geeft de <see cref="Zorgaanbieder"/> met de opgegeven naam.
         /// </summary>
@@ -59,13 +55,18 @@ namespace MedMij
         /// <exception cref="System.Collections.Generic.KeyNotFoundException">Wordt gegenereerd als de naam niet wordt gevonden.</exception>
         public Zorgaanbieder GetByName(string name)
         {
-            var zorgaanbieder = this.data.FirstOrDefault(p => p.Naam == name);
+            var zorgaanbieder = Data.FirstOrDefault(p => p.Naam == name);
             if (zorgaanbieder == null)
                 throw new KeyNotFoundException();
             return zorgaanbieder;
         }
 
-        private static List<Zorgaanbieder> Parse(XDocument doc)
+        /// <summary>
+        /// Parses the xml document to the list
+        /// </summary>
+        /// <param name="doc">The xml documetn</param>
+        /// <returns>A list with data</returns>
+        protected override List<Zorgaanbieder> ParseXml(XDocument doc)
         {
             Gegevensdienst ParseGegevensdienst(XElement x, string zorgaanbiedernaam)
             {

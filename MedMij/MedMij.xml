@@ -11,27 +11,37 @@
         </member>
         <member name="P:MedMij.Gegevensdienst.Id">
             <summary>
-            Geeft de binnen de zorgaanbieder unieke id van de gegevensdienst
+            Gets de binnen de zorgaanbieder unieke id van de gegevensdienst
             </summary>
         </member>
         <member name="P:MedMij.Gegevensdienst.Zorgaanbiedernaam">
             <summary>
-            Geeft de naam van de zorgaanbieder van deze gevensdienst. Eindigt altijd op "@medmij"
+            Gets de naam van de zorgaanbieder van deze gevensdienst. Eindigt altijd op "@medmij"
             </summary>
         </member>
         <member name="P:MedMij.Gegevensdienst.AuthorizationEndpointUri">
             <summary>
-            Geeft de AuthorizationEndpointUri van deze gevensdienst.
+            Gets de AuthorizationEndpointUri van deze gevensdienst.
             </summary>
         </member>
         <member name="P:MedMij.Gegevensdienst.TokenEndpointUri">
             <summary>
-            Geeft de TokenEndpointUri van deze gevensdienst.
+            Gets de TokenEndpointUri van deze gevensdienst.
             </summary>
         </member>
-        <member name="T:MedMij.Gegevensdinstnaam">
+        <member name="T:MedMij.Gegevensdienstnaam">
             <summary>
             The gegevensdienstnaam. see definition on https://afsprakenstelsel.medmij.nl/
+            </summary>
+        </member>
+        <member name="P:MedMij.Gegevensdienstnaam.GegevensdienstId">
+            <summary>
+            Gets the GegevensdienstId
+            </summary>
+        </member>
+        <member name="P:MedMij.Gegevensdienstnaam.Weergavenaam">
+            <summary>
+            Gets Weergavenaam
             </summary>
         </member>
         <member name="T:MedMij.IGegevensdienst">
@@ -41,22 +51,22 @@
         </member>
         <member name="P:MedMij.IGegevensdienst.Id">
             <summary>
-            Geeft de Id van deze gevensdienst.
+            Gets de Id van deze gevensdienst.
             </summary>
         </member>
         <member name="P:MedMij.IGegevensdienst.Zorgaanbiedernaam">
             <summary>
-            Geeft de naam van de zorgaanbieder van deze gevensdienst. Eindigt altijd op "@medmij"
+            Gets de naam van de zorgaanbieder van deze gevensdienst. Eindigt altijd op "@medmij"
             </summary>
         </member>
         <member name="P:MedMij.IGegevensdienst.AuthorizationEndpointUri">
             <summary>
-            Geeft de AuthorizationEndpointUri van deze gevensdienst.
+            Gets de AuthorizationEndpointUri van deze gevensdienst.
             </summary>
         </member>
         <member name="P:MedMij.IGegevensdienst.TokenEndpointUri">
             <summary>
-            Geeft de TokenEndpointUri van deze gevensdienst.
+            Gets de TokenEndpointUri van deze gevensdienst.
             </summary>
         </member>
         <member name="T:MedMij.OAuthClient">
@@ -66,12 +76,12 @@
         </member>
         <member name="P:MedMij.OAuthClient.Hostname">
             <summary>
-            Geeft de hostname van een OAuth Client van een "Dienstverleners persoon"
+            Gets de hostname van een OAuth Client van een "Dienstverleners persoon"
             </summary>
         </member>
         <member name="P:MedMij.OAuthClient.Organisatienaam">
             <summary>
-            Geeft de unieke en gebruiksvriendelijke naam van een "Dienstverleners persoon"
+            Gets de unieke en gebruiksvriendelijke naam van een "Dienstverleners persoon"
             </summary>
         </member>
         <member name="T:MedMij.Zorgaanbieder">
@@ -81,12 +91,12 @@
         </member>
         <member name="P:MedMij.Zorgaanbieder.Naam">
             <summary>
-            Geeft de unieke en gebruiksvriendelijke naam van een zorgaanbieder
+            Gets de unieke en gebruiksvriendelijke naam van een zorgaanbieder
             </summary>
         </member>
         <member name="P:MedMij.Zorgaanbieder.Gegevensdiensten">
             <summary>
-            Geeft de lijst met gegevensdiensten die horen bij deze zorgaanbieder
+            Gets de lijst met gegevensdiensten die horen bij deze zorgaanbieder
             </summary>
         </member>
         <member name="T:MedMij.Gegevensdienstnamenlijst">
@@ -103,8 +113,34 @@
         </member>
         <member name="M:MedMij.Gegevensdienstnamenlijst.GetMapIdToName">
             <summary>
-            Returns a dictionary with the Gegevensdinstnaam.Weergave
+            Returns a dictionary with mapping from id to gegevensdienst name
             </summary>
+            <returns>A dictionary with the names</returns>
+        </member>
+        <member name="M:MedMij.Gegevensdienstnamenlijst.ParseXml(System.Xml.Linq.XDocument)">
+            <summary>
+            Parses the xml document to the list
+            </summary>
+            <param name="doc">The xml documetn</param>
+            <returns>A list with data</returns>
+        </member>
+        <member name="T:MedMij.MedMijListBase`1">
+            <summary>
+            The base class for the MedMij lists
+            </summary>
+            <typeparam name="T">The data structure used in the list</typeparam>
+        </member>
+        <member name="P:MedMij.MedMijListBase`1.Data">
+            <summary>
+            Gets or sets the data list
+            </summary>
+        </member>
+        <member name="M:MedMij.MedMijListBase`1.ParseXml(System.Xml.Linq.XDocument)">
+            <summary>
+            Parses the xml document to the list
+            </summary>
+            <param name="doc">The xml documetn</param>
+            <returns>A list with data</returns>
         </member>
         <member name="T:MedMij.OAuthclientlist">
             <summary>
@@ -125,6 +161,13 @@
             <param name="naam">De organisatienaam van de <see cref="T:MedMij.OAuthClient"/></param>
             <returns>De gezochte <see cref="T:MedMij.OAuthClient"/>.</returns>
             <exception cref="T:System.Collections.Generic.KeyNotFoundException">Wordt gegenereerd als de naam niet wordt gevonden.</exception>
+        </member>
+        <member name="M:MedMij.OAuthclientlist.ParseXml(System.Xml.Linq.XDocument)">
+            <summary>
+            Parses the xml document to the list
+            </summary>
+            <param name="doc">The xml documetn</param>
+            <returns>A list with data</returns>
         </member>
         <member name="T:MedMij.Oauth.PGOOAuth">
             <summary>
@@ -179,12 +222,19 @@
             <param name="xmlData">Een string met de whitelist als XML.</param>
             <returns>De nieuwe <see cref="T:MedMij.Whitelist"/>.</returns>
         </member>
-        <member name="M:MedMij.Whitelist.Contains(System.String)">
+        <member name="M:MedMij.Whitelist.IsMedMijNode(System.String)">
             <summary>
             Bepaalt of een <see cref="T:MedMij.Whitelist"/> een bepaalde hostname bevat.
             </summary>
             <param name="hostname">De hostname die gecontroleerd wordt.</param>
             <returns><c>true</c> als de hostname op de lijst staat. Anders <c>false</c>.</returns>
+        </member>
+        <member name="M:MedMij.Whitelist.ParseXml(System.Xml.Linq.XDocument)">
+            <summary>
+            Parses the xml document to the list
+            </summary>
+            <param name="doc">The xml documetn</param>
+            <returns>A list with data</returns>
         </member>
         <member name="T:MedMij.Zorgaanbiederslijst">
             <summary>
@@ -205,6 +255,13 @@
             <param name="name">De naam van de <see cref="T:MedMij.Zorgaanbieder"/></param>
             <returns>De gezochte <see cref="T:MedMij.Zorgaanbieder"/>.</returns>
             <exception cref="T:System.Collections.Generic.KeyNotFoundException">Wordt gegenereerd als de naam niet wordt gevonden.</exception>
+        </member>
+        <member name="M:MedMij.Zorgaanbiederslijst.ParseXml(System.Xml.Linq.XDocument)">
+            <summary>
+            Parses the xml document to the list
+            </summary>
+            <param name="doc">The xml documetn</param>
+            <returns>A list with data</returns>
         </member>
     </members>
 </doc>

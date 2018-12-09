@@ -13,15 +13,13 @@ namespace MedMij
             this.Organisatienaam = organisatienaam;
         }
 
-        // StyleCop kan geen Nederlands
-        #pragma warning disable SA1623 // PropertySummaryDocumentationMustMatchAccessors
         /// <summary>
-        /// Geeft de hostname van een OAuth Client van een "Dienstverleners persoon"
+        /// Gets de hostname van een OAuth Client van een "Dienstverleners persoon"
         /// </summary>
         public string Hostname { get; }
 
         /// <summary>
-        /// Geeft de unieke en gebruiksvriendelijke naam van een "Dienstverleners persoon"
+        /// Gets de unieke en gebruiksvriendelijke naam van een "Dienstverleners persoon"
         /// </summary>
         public string Organisatienaam { get; }
     }

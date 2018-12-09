@@ -1,15 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <NoWarn>SA1600,SA1503,SA1101,CA1054,SA1516,CA1305,SA1633,SA1623,CA2227</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="Xsd/*.xsd" />
-  </ItemGroup>
-  <ItemGroup>
-    <AdditionalFiles Include="stylecop.json" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.1.1" />

@@ -17,24 +17,21 @@ namespace MedMij
     /// <summary>
     /// Een gegevensdienstnamenlijst zoals beschreven op https://afsprakenstelsel.medmij.nl/
     /// </summary>
-    public class Gegevensdienstnamenlijst
+    public class Gegevensdienstnamenlijst : MedMijListBase<Gegevensdienstnaam>
     {
-        private static XNamespace NS => Definitions.GegevensdienstnamenlijstNamespace;
-        private static XName GegevensdienstnamenlijstRoot => NS + Definitions.Gegevensdienstnamenlijst;
         private static readonly XName GegevensdienstName = NS + "Gegevensdienst";
         private static readonly XName GegevensdienstIdName = NS + "GegevensdienstId";
         private static readonly XName WeergavenaamName = NS + "Weergavenaam";
         private static readonly XmlSchemaSet Schemas = XMLUtils.SchemaSetFromResource(Definitions.XsdName(Definitions.Gegevensdienstnamenlijst), NS);
 
-        private readonly List<Gegevensdinstnaam> data;
-
         private Gegevensdienstnamenlijst(XDocument doc)
         {
             XMLUtils.Validate(doc, Schemas, GegevensdienstnamenlijstRoot);
-            this.data = Parse(doc);
+            Data = ParseXml(doc);
         }
 
-        public List<Gegevensdinstnaam> Data => data;
+        private static XNamespace NS => Definitions.GegevensdienstnamenlijstNamespace;
+        private static XName GegevensdienstnamenlijstRoot => NS + Definitions.Gegevensdienstnamenlijst;
 
         /// <summary>
         /// Initialiseert een <see cref="Gegevensdienstnamenlijst"/> vanuit een string. Parset de string and valideert deze.
@@ -50,15 +47,21 @@ namespace MedMij
         /// <summary>
         /// Returns a dictionary with mapping from id to gegevensdienst name
         /// </summary>
+        /// <returns>A dictionary with the names</returns>
         public Dictionary<string, string> GetMapIdToName()
         {
-            return this.data.ToDictionary(p => p.GegevensdienstId, p => p.Weergavenaam);
+            return Data.ToDictionary(p => p.GegevensdienstId, p => p.Weergavenaam);
         }
 
-        private static List<Gegevensdinstnaam> Parse(XDocument doc)
+        /// <summary>
+        /// Parses the xml document to the list
+        /// </summary>
+        /// <param name="doc">The xml documetn</param>
+        /// <returns>A list with data</returns>
+        protected override List<Gegevensdienstnaam> ParseXml(XDocument doc)
         {
-            Gegevensdinstnaam MapElement(XElement x)
-                => new Gegevensdinstnaam
+            Gegevensdienstnaam MapElement(XElement x)
+                => new Gegevensdienstnaam
                 {
                     GegevensdienstId = x.Element(GegevensdienstIdName).Value,
                     Weergavenaam = x.Element(WeergavenaamName).Value

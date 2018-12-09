@@ -17,15 +17,13 @@ namespace MedMij
             this.Gegevensdiensten = new ReadOnlyDictionary<string, Gegevensdienst>(gegevensdiensten);
         }
 
-        // StyleCop kan geen Nederlands
-        #pragma warning disable SA1623 // PropertySummaryDocumentationMustMatchAccessors
         /// <summary>
-        /// Geeft de unieke en gebruiksvriendelijke naam van een zorgaanbieder
+        /// Gets de unieke en gebruiksvriendelijke naam van een zorgaanbieder
         /// </summary>
         public string Naam { get; }
 
         /// <summary>
-        /// Geeft de lijst met gegevensdiensten die horen bij deze zorgaanbieder
+        /// Gets de lijst met gegevensdiensten die horen bij deze zorgaanbieder
         /// </summary>
         public IReadOnlyDictionary<string, Gegevensdienst> Gegevensdiensten { get; }
     }

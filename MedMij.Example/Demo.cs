@@ -35,7 +35,7 @@ namespace MedMij.Example
 
                 Console.WriteLine($"Whitelist: \n=================");
                 var whitelist = MedMij.Whitelist.FromXMLData(await whlxml);
-                Console.WriteLine($"Is {oc.Hostname} on whitelist: {whitelist.Contains(oc.Hostname)}\n");
+                Console.WriteLine($"Is {oc.Hostname} on whitelist: {whitelist.IsMedMijNode(oc.Hostname)}\n");
 
 
                 Console.WriteLine($"ZAL: \n=================");

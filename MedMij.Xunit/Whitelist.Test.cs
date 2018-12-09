@@ -38,7 +38,7 @@ namespace MedMij.Xunit
         public void WhitelistContains(string hostname)
         {
             var whitelist = Whitelist.FromXMLData(WhitelistTestMock.WhiltelistExampleXML);
-            Assert.True(whitelist.Contains(hostname));
+            Assert.True(whitelist.IsMedMijNode(hostname));
         }
 
         [Theory]
@@ -49,7 +49,7 @@ namespace MedMij.Xunit
         public void WhitelistNotContains(string hostname)
         {
             var whitelist = Whitelist.FromXMLData(WhitelistTestMock.WhiltelistExampleXML);
-            Assert.False(whitelist.Contains(hostname));
+            Assert.False(whitelist.IsMedMijNode(hostname));
         }
     }
 }
