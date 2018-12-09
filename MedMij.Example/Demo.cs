@@ -45,6 +45,11 @@ namespace MedMij.Example
                 Console.WriteLine($"AuthorizationEndpointUri: {geg.AuthorizationEndpointUri}");
                 Console.WriteLine($"TokenEndpointUri: {geg.TokenEndpointUri}\n");
 
+                Console.WriteLine($"GNL: \n=================");
+                var gnl = MedMij.Gegevensdienstnamenlijst.FromXMLData(await gnlxml);
+                var gn = gnl.GetMapIdToName()["2"];
+                Console.WriteLine($"Weergavenaam : {gn}");
+
                 Console.WriteLine($"Authorization: \n=================");
                 var zaAuthenticationUri = MedMij.Oauth.PGOOAuth.MakeAuthUri(
                         gegevensdienst: geg,
