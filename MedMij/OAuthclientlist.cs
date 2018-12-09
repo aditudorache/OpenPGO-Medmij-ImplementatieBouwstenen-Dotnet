@@ -22,7 +22,7 @@ namespace MedMij
         private static readonly XName OAuthclientName = NS + "OAuthclient";
         private static readonly XName OrganisatienaamName = NS + "OAuthclientOrganisatienaam";
         private static readonly XName HostnameName = NS + "Hostname";
-        private static readonly XmlSchemaSet Schemas = XMLUtils.SchemaSetFromResource(Definitions.XsdName(Definitions.OAuthclientlist), NS);
+        private static readonly XmlSchemaSet Schemas = XMLUtils.SchemaSetFromResource(MedMijDefinitions.XsdName(MedMijDefinitions.OAuthclientlist), NS);
 
         private OAuthclientlist(XDocument doc)
         {
@@ -30,8 +30,8 @@ namespace MedMij
             Data = ParseXml(doc);
         }
 
-        private static XNamespace NS => Definitions.OAuthclientlistNamespace;
-        private static XName OAuthclientlistRoot => NS + Definitions.OAuthclientlist;
+        private static XNamespace NS => MedMijDefinitions.OAuthclientlistNamespace;
+        private static XName OAuthclientlistRoot => NS + MedMijDefinitions.OAuthclientlist;
 
         /// <summary>
         /// Initialiseert een <see cref="OAuthclientlist"/> vanuit een string. Parset de string and valideert deze.
@@ -62,7 +62,7 @@ namespace MedMij
         /// <summary>
         /// Parses the xml document to the list
         /// </summary>
-        /// <param name="doc">The xml documetn</param>
+        /// <param name="doc">The xml document</param>
         /// <returns>A list with data</returns>
         protected override List<OAuthClient> ParseXml(XDocument doc)
         {

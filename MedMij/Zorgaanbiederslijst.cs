@@ -19,8 +19,6 @@ namespace MedMij
     /// </summary>
     public class Zorgaanbiederslijst : MedMijListBase<Zorgaanbieder>
     {
-        private static readonly XNamespace NS = "xmlns://afsprakenstelsel.medmij.nl/zorgaanbiederslijst/release2/";
-        private static readonly XName ZorgaanbiederslijstRoot = NS + "Zorgaanbiederslijst";
         private static readonly XName ZorgaanbiederName = NS + "Zorgaanbieder";
         private static readonly XName ZorgaanbiedernaamName = NS + "Zorgaanbiedernaam";
         private static readonly XName GegevensdienstName = NS + "Gegevensdienst";
@@ -28,13 +26,16 @@ namespace MedMij
         private static readonly XName AuthorizationEndpointuriName = NS + "AuthorizationEndpointuri";
         private static readonly XName TokenEndpointuriName = NS + "TokenEndpointuri";
 
-        private static readonly XmlSchemaSet Schemas = XMLUtils.SchemaSetFromResource(Definitions.XsdName(Definitions.Zorgaanbiederslijst), NS);
+        private static readonly XmlSchemaSet Schemas = XMLUtils.SchemaSetFromResource(MedMijDefinitions.XsdName(MedMijDefinitions.Zorgaanbiederslijst), NS);
 
         private Zorgaanbiederslijst(XDocument doc)
         {
             XMLUtils.Validate(doc, Schemas, ZorgaanbiederslijstRoot);
             Data = ParseXml(doc);
         }
+
+        private static XNamespace NS => MedMijDefinitions.ZorgaanbiederslijstNamespace;
+        private static XName ZorgaanbiederslijstRoot => NS + MedMijDefinitions.Zorgaanbiederslijst;
 
         /// <summary>
         /// Initialiseert een <see cref="Zorgaanbiederslijst"/> vanuit een string. Parset de string and valideert deze.
@@ -64,7 +65,7 @@ namespace MedMij
         /// <summary>
         /// Parses the xml document to the list
         /// </summary>
-        /// <param name="doc">The xml documetn</param>
+        /// <param name="doc">The xml document</param>
         /// <returns>A list with data</returns>
         protected override List<Zorgaanbieder> ParseXml(XDocument doc)
         {

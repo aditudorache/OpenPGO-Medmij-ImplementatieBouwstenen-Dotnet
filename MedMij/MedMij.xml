@@ -121,7 +121,7 @@
             <summary>
             Parses the xml document to the list
             </summary>
-            <param name="doc">The xml documetn</param>
+            <param name="doc">The xml document</param>
             <returns>A list with data</returns>
         </member>
         <member name="T:MedMij.MedMijListBase`1">
@@ -139,7 +139,7 @@
             <summary>
             Parses the xml document to the list
             </summary>
-            <param name="doc">The xml documetn</param>
+            <param name="doc">The xml document</param>
             <returns>A list with data</returns>
         </member>
         <member name="T:MedMij.OAuthclientlist">
@@ -166,7 +166,7 @@
             <summary>
             Parses the xml document to the list
             </summary>
-            <param name="doc">The xml documetn</param>
+            <param name="doc">The xml document</param>
             <returns>A list with data</returns>
         </member>
         <member name="T:MedMij.Oauth.PGOOAuth">
@@ -233,7 +233,7 @@
             <summary>
             Parses the xml document to the list
             </summary>
-            <param name="doc">The xml documetn</param>
+            <param name="doc">The xml document</param>
             <returns>A list with data</returns>
         </member>
         <member name="T:MedMij.Zorgaanbiederslijst">
@@ -260,7 +260,7 @@
             <summary>
             Parses the xml document to the list
             </summary>
-            <param name="doc">The xml documetn</param>
+            <param name="doc">The xml document</param>
             <returns>A list with data</returns>
         </member>
     </members>

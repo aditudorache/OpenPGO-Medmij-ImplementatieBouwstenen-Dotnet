@@ -22,7 +22,7 @@ namespace MedMij
         private static readonly XName GegevensdienstName = NS + "Gegevensdienst";
         private static readonly XName GegevensdienstIdName = NS + "GegevensdienstId";
         private static readonly XName WeergavenaamName = NS + "Weergavenaam";
-        private static readonly XmlSchemaSet Schemas = XMLUtils.SchemaSetFromResource(Definitions.XsdName(Definitions.Gegevensdienstnamenlijst), NS);
+        private static readonly XmlSchemaSet Schemas = XMLUtils.SchemaSetFromResource(MedMijDefinitions.XsdName(MedMijDefinitions.Gegevensdienstnamenlijst), NS);
 
         private Gegevensdienstnamenlijst(XDocument doc)
         {
@@ -30,8 +30,8 @@ namespace MedMij
             Data = ParseXml(doc);
         }
 
-        private static XNamespace NS => Definitions.GegevensdienstnamenlijstNamespace;
-        private static XName GegevensdienstnamenlijstRoot => NS + Definitions.Gegevensdienstnamenlijst;
+        private static XNamespace NS => MedMijDefinitions.GegevensdienstnamenlijstNamespace;
+        private static XName GegevensdienstnamenlijstRoot => NS + MedMijDefinitions.Gegevensdienstnamenlijst;
 
         /// <summary>
         /// Initialiseert een <see cref="Gegevensdienstnamenlijst"/> vanuit een string. Parset de string and valideert deze.
@@ -56,7 +56,7 @@ namespace MedMij
         /// <summary>
         /// Parses the xml document to the list
         /// </summary>
-        /// <param name="doc">The xml documetn</param>
+        /// <param name="doc">The xml document</param>
         /// <returns>A list with data</returns>
         protected override List<Gegevensdienstnaam> ParseXml(XDocument doc)
         {

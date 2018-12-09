@@ -19,7 +19,7 @@ namespace MedMij
         /// <summary>
         /// Parses the xml document to the list
         /// </summary>
-        /// <param name="doc">The xml documetn</param>
+        /// <param name="doc">The xml document</param>
         /// <returns>A list with data</returns>
         protected abstract List<T> ParseXml(XDocument doc);
     }

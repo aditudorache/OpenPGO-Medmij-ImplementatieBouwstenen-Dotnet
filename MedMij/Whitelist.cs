@@ -17,16 +17,17 @@ namespace MedMij
     /// </summary>
     public class Whitelist : MedMijListBase<string>
     {
-        private static readonly XNamespace NS = "xmlns://afsprakenstelsel.medmij.nl/whitelist/release2/";
-        private static readonly XName WhitelistRoot = NS + "Whitelist";
         private static readonly XName MedMijNode = NS + "MedMijNode";
-        private static readonly XmlSchemaSet Schemas = XMLUtils.SchemaSetFromResource(Definitions.XsdName(Definitions.Whitelist), NS);
+        private static readonly XmlSchemaSet Schemas = XMLUtils.SchemaSetFromResource(MedMijDefinitions.XsdName(MedMijDefinitions.Whitelist), NS);
 
         private Whitelist(XDocument doc)
         {
             XMLUtils.Validate(doc, Schemas, WhitelistRoot);
             Data = ParseXml(doc);
         }
+
+        private static XNamespace NS => MedMijDefinitions.WhitelistNamespace;
+        private static XName WhitelistRoot => NS + MedMijDefinitions.Whitelist;
 
         /// <summary>
         /// Initialiseert een <see cref="Whitelist"/> vanuit een string. Parset de string and valideert deze.
@@ -49,7 +50,7 @@ namespace MedMij
         /// <summary>
         /// Parses the xml document to the list
         /// </summary>
-        /// <param name="doc">The xml documetn</param>
+        /// <param name="doc">The xml document</param>
         /// <returns>A list with data</returns>
         protected override List<string> ParseXml(XDocument doc)
             => doc.Descendants(MedMijNode).Select(n => n.Value).ToList();
