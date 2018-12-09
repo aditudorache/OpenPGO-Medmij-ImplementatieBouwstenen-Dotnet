@@ -1,8 +1,15 @@
 # Medmij dotnet
 
+The Medmij for .Net git project is a .NET component that implements the base functionality for accessing the MedMij data.
+It consists of 3 projects:
+* `MedMij` - the library component. This can be included and used in .NET projects that acces MedMij data
+* `MedMij.Xunit` - the unittests project
+* `MedMij.Example` - the example project with working code for usage of the MedMij component
+
+
 ## Installation
 
-First clone the repo:
+First clone, restore and build  repo:
 
 ```shell
 $ PATH_TO_CLONE=~/example/medmij-dotnet
@@ -37,13 +44,24 @@ Reference `..\medmij-donet\MedMij\MedMij.csproj` added to the project.
 
 ## How to use
 
-See the MedMij.Example project for code examples
+See the MedMij.Example project for working code examples for each scenario
 
 
 ## Testing
 
+For the unittests is Xunit test framework used.
+
+To run the tests use
+
 ```shell
 $ cd $PATH_TO_CLONE/MedMij.Xunit
+$ dotnet test
+...
+```
+
+or
+
+```shell
 $ dotnet watch test
 ...
 ```

@@ -34,23 +34,6 @@
             The gegevensdienstnaam. see definition on https://afsprakenstelsel.medmij.nl/
             </summary>
         </member>
-        <member name="T:MedMij.Gegevensdienstnamenlijst">
-            <summary>
-            Een gegevensdienstnamenlijst zoals beschreven op https://afsprakenstelsel.medmij.nl/
-            </summary>
-        </member>
-        <member name="M:MedMij.Gegevensdienstnamenlijst.FromXMLData(System.String)">
-            <summary>
-            Initialiseert een <see cref="T:MedMij.Gegevensdienstnamenlijst"/> vanuit een string. Parset de string and valideert deze.
-            </summary>
-            <param name="xmlData">Een string met de zorgaanbiederslijst als XML.</param>
-            <returns>De nieuwe <see cref="T:MedMij.Gegevensdienstnamenlijst"/>.</returns>
-        </member>
-        <member name="M:MedMij.Gegevensdienstnamenlijst.GetMapIdToName">
-            <summary>
-            Returns a dictionary with the Gegevensdinstnaam.Weergave
-            </summary>
-        </member>
         <member name="T:MedMij.IGegevensdienst">
             <summary>
             Een gegevensdienst zoals beschreven op https://afsprakenstelsel.medmij.nl/
@@ -89,6 +72,38 @@
         <member name="P:MedMij.OAuthClient.Organisatienaam">
             <summary>
             Geeft de unieke en gebruiksvriendelijke naam van een "Dienstverleners persoon"
+            </summary>
+        </member>
+        <member name="T:MedMij.Zorgaanbieder">
+            <summary>
+            Een zorgaanbieder zoals beschreven op https://afsprakenstelsel.medmij.nl/
+            </summary>
+        </member>
+        <member name="P:MedMij.Zorgaanbieder.Naam">
+            <summary>
+            Geeft de unieke en gebruiksvriendelijke naam van een zorgaanbieder
+            </summary>
+        </member>
+        <member name="P:MedMij.Zorgaanbieder.Gegevensdiensten">
+            <summary>
+            Geeft de lijst met gegevensdiensten die horen bij deze zorgaanbieder
+            </summary>
+        </member>
+        <member name="T:MedMij.Gegevensdienstnamenlijst">
+            <summary>
+            Een gegevensdienstnamenlijst zoals beschreven op https://afsprakenstelsel.medmij.nl/
+            </summary>
+        </member>
+        <member name="M:MedMij.Gegevensdienstnamenlijst.FromXMLData(System.String)">
+            <summary>
+            Initialiseert een <see cref="T:MedMij.Gegevensdienstnamenlijst"/> vanuit een string. Parset de string and valideert deze.
+            </summary>
+            <param name="xmlData">Een string met de zorgaanbiederslijst als XML.</param>
+            <returns>De nieuwe <see cref="T:MedMij.Gegevensdienstnamenlijst"/>.</returns>
+        </member>
+        <member name="M:MedMij.Gegevensdienstnamenlijst.GetMapIdToName">
+            <summary>
+            Returns a dictionary with the Gegevensdinstnaam.Weergave
             </summary>
         </member>
         <member name="T:MedMij.OAuthclientlist">
@@ -170,21 +185,6 @@
             </summary>
             <param name="hostname">De hostname die gecontroleerd wordt.</param>
             <returns><c>true</c> als de hostname op de lijst staat. Anders <c>false</c>.</returns>
-        </member>
-        <member name="T:MedMij.Zorgaanbieder">
-            <summary>
-            Een zorgaanbieder zoals beschreven op https://afsprakenstelsel.medmij.nl/
-            </summary>
-        </member>
-        <member name="P:MedMij.Zorgaanbieder.Naam">
-            <summary>
-            Geeft de unieke en gebruiksvriendelijke naam van een zorgaanbieder
-            </summary>
-        </member>
-        <member name="P:MedMij.Zorgaanbieder.Gegevensdiensten">
-            <summary>
-            Geeft de lijst met gegevensdiensten die horen bij deze zorgaanbieder
-            </summary>
         </member>
         <member name="T:MedMij.Zorgaanbiederslijst">
             <summary>

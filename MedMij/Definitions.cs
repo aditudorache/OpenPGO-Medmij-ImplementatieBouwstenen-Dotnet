@@ -2,7 +2,7 @@
 
 namespace MedMij
 {
-    public class Definitions
+    internal class Definitions
     {
         public const string Gegevensdienstnamenlijst = "Gegevensdienstnamenlijst";
         public const string GegevensdienstnamenlijstNamespace = "xmlns://afsprakenstelsel.medmij.nl/gegevensdienstnamenlijst/release1/";

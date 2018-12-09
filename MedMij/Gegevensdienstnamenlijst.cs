@@ -48,7 +48,7 @@ namespace MedMij
         }
 
         /// <summary>
-        /// Returns a dictionary with the Gegevensdinstnaam.Weergave
+        /// Returns a dictionary with mapping from id to gegevensdienst name
         /// </summary>
         public Dictionary<string, string> GetMapIdToName()
         {
