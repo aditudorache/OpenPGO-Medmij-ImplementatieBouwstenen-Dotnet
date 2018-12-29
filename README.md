@@ -1,16 +1,26 @@
 # Medmij dotnet
+.NET implementation of the MedMij OpenPGO building blocks.
+The Medmij for .Net git project is the .NET implementation of the MedMij OpenPGO building blocks.
 
-The Medmij for .Net git project is a .NET component that implements the base functionality for accessing the MedMij data.
+#### Version Guidance
+
+This library follows [Semantic Versioning](https://semver.org/).
+The versions of the Afspraken set are mapped to the versions of the library as follows:
+
+| Version Afsprakenset | Status | Version library |
+|----------------------------|------------|-----------------|
+| [Afsprakenset release 1.1] | Latest | 0.2.* |
+
+[Afsprakenset release 1.1]: https://afsprakenstelsel.medmij.nl/display/PUBLIC/Afsprakenset+release+1.1
+
+## Structure
 It consists of 3 projects:
 * `MedMij` - the library component. This can be included and used in .NET projects that acces MedMij data
 * `MedMij.Xunit` - the unittests project
 * `MedMij.Example` - the example project with working code for usage of the MedMij component
 
-
 ## Installation
-
-First clone, restore and build  repo:
-
+First clone, restore and build the repo:
 ```shell
 $ PATH_TO_CLONE=~/example/medmij-dotnet
 $ git clone https://github.com/Zorgdoc/medmij-dotnet.git $PATH_TO_CLONE

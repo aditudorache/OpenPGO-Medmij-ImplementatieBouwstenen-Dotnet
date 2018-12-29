@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>0.2.0.0</Version>
     <NoWarn>SA1600,SA1503,SA1101,CA1054,SA1516,CA1305,SA1633,SA1623,CA2227</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
