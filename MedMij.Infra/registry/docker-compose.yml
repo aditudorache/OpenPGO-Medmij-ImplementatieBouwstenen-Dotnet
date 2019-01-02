@@ -1,0 +1,14 @@
+version: '3.5'
+
+services:
+  gdn-registry:
+    container_name: gdn-registry
+    image: registry:2
+    volumes:
+      - /c/Docker/gdn-registry/registry:/var/lib/registry
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+
+volumes:
+  registry:
